@@ -1,0 +1,158 @@
+{
+    "angry-interns": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": [
+            "pts"
+        ]
+    },
+    "chair-race": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "coffee-run": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "coffee-spiller": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": [
+            "pts"
+        ]
+    },
+    "db-admin": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "english-class": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "expediente-x": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "inbox-zero": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "java-corp": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "kick-the-boss": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "lab-git": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "math-exam": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "meeting-tetris": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "micromanager": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "mute-all": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "paper-sniper": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "printer-panic": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "prog-web": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "salary-negotiator": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "secure-delete": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "slack-mole": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "spreadsheet-saga": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "sudoku": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "system-crash": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "tab-hoarder": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "terminal-tycoon": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "update-manager": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "voodoo-ticket": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "vpn-tuner": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": []
+    },
+    "whack-a-boss": {
+        "has_return": true,
+        "has_instructions": true,
+        "english_found": [
+            "pts"
+        ]
+    }
+}

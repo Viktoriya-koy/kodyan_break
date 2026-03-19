@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal del Agente - Gobierno de San Luis</title>
+    <link rel="stylesheet" href="launcher_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    
+    <style>
+        .folder-icon:hover {
+            transform: translateY(-5px) !important;
+        }
+        .grid-3x2 {
+            grid-template-columns: repeat(3, 1fr) !important;
+        }
+        @media (max-width: 768px) {
+            .grid-3x2 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .grid-3x2 {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+    <!-- Abstract Background for Glassmorphism -->
+    <div class="glass-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="logo-area">
+            <div class="escudo" id="display-escudo"><span class="material-symbols-outlined" style="font-size: 32px;">account_balance</span></div>
+            <div class="titles">
+                <h1 id="display-title-main">Gobierno de la Provincia de San Luis</h1>
+                <h2 id="display-title-sub">Secretaría de Ambiente</h2>
+            </div>
+        </div>
+
+        <div class="user-area">
+            <span class="material-symbols-outlined" style="cursor:pointer; margin-right:5px; opacity:0.8; font-size:24px; color:var(--accent-color);" title="Ayuda y Funcionamiento" onclick="document.getElementById('help-modal').style.display='flex'">help</span>
+            <span class="user-name" id="display-agent-name">Agente: Vico</span>
+            <span class="user-role" id="display-agent-role">Logística y Movilidad</span>
+            <div class="avatar" id="display-avatar" title="Configurar Portal"
+                onclick="document.getElementById('settings-modal').style.display='flex'">V</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <ul>
+                <li class="active">Inicio</li>
+                <li>Mis Trámites</li>
+                <li>Expedientes GDE</li>
+                <li>Recibo de Sueldo Digital</li>
+                <li>Normativa Vigente</li>
+                <li class="separator"></li>
+                <li>Soporte Técnico</li>
+                <li>Cerrar Sesión</li>
+            </ul>
+
+            <!-- User Profile Widget (Corporate Style) -->
+            <div class="profile-widget corporate-panel">
+                <div class="panel-header">FICHA DE AGENTE</div>
+                <div class="profile-content">
+                    <div class="user-row" style="background: #e8f5e9; padding: 5px 8px; border-radius: 4px; margin-bottom: 8px; border: 1px solid #c8e6c9;">
+                        <span class="label" style="display:flex; align-items:center; gap:5px; color:#2e7d32; font-weight:bold;"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> Productividad:</span>
+                        <span class="value" id="global-coins" style="color:#2e7d32; font-size: 14px;">0</span>
+                    </div>
+                    <div class="user-row">
+                        <span class="label">Agente:</span>
+                        <span class="value" id="display-widget-name">Vico</span>
+                    </div>
+                    <div class="user-row">
+                        <span class="label">Categoría:</span>
+                        <span class="value" id="user-rank">...</span>
+                    </div>
+                    <div class="user-row">
+                        <span class="label">Evaluación:</span>
+                        <span class="value" id="xp-text">Calculando...</span>
+                    </div>
+                    <div class="xp-bar-corp">
+                        <div class="xp-unfilled">
+                            <div class="xp-filled" id="xp-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </nav>
+
+        <!-- (Main Content) -->
+        <main class="dashboard">
+            <!-- (Welcome Banner) -->
+            <div class="welcome-banner">
+                <h3 id="display-welcome-title">Bienvenido al Portal de Autogestión</h3>
+                <p id="display-welcome-text">Novedades: Se abren las inscripciones para la capacitación obligatoria en
+                    "Gestión de Residuos Electrónicos".</p>
+            </div>
+            <!-- (Systems Grid) -->
+            <div class="launcher-container"
+                style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+
+                <!-- Widgets Section -->
+                <div class="widgets-container">
+                    <!-- Clock, Weather, News -->
+                </div>
+
+                
+                <div class="desktop-folders" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 25px; width: 100%; max-width: 1000px; margin-bottom: 40px; margin-top: 20px;">
+                    <div class="folder-icon" onclick="openFolder('rrhh', 'Recursos Humanos')" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+                        <div style="color: var(--primary-color); margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"><span class="material-symbols-outlined" style="font-size: 120px; font-variation-settings: 'FILL' 1;">folder_shared</span></div>
+                        <div style="font-weight: 600; color: #333; font-size: 14px; background: rgba(255,255,255,0.7); padding: 5px; border-radius: 5px;">Recursos Humanos</div>
+                    </div>
+                    <div class="folder-icon" onclick="openFolder('it', 'Sistemas e Infraestructura')" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+                        <div style="color: var(--primary-color); margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"><span class="material-symbols-outlined" style="font-size: 120px; font-variation-settings: 'FILL' 1;">dns</span></div>
+                        <div style="font-weight: 600; color: #333; font-size: 14px; background: rgba(255,255,255,0.7); padding: 5px; border-radius: 5px;">Sistemas e Infra.</div>
+                    </div>
+                    <div class="folder-icon" onclick="openFolder('ops', 'Operaciones')" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+                        <div style="color: var(--primary-color); margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"><span class="material-symbols-outlined" style="font-size: 120px; font-variation-settings: 'FILL' 1;">folder_managed</span></div>
+                        <div style="font-weight: 600; color: #333; font-size: 14px; background: rgba(255,255,255,0.7); padding: 5px; border-radius: 5px;">Operaciones</div>
+                    </div>
+                    <div class="folder-icon" onclick="openFolder('comms', 'Comunicaciones')" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+                        <div style="color: var(--primary-color); margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"><span class="material-symbols-outlined" style="font-size: 120px; font-variation-settings: 'FILL' 1;">forum</span></div>
+                        <div style="font-weight: 600; color: #333; font-size: 14px; background: rgba(255,255,255,0.7); padding: 5px; border-radius: 5px;">Comunicaciones</div>
+                    </div>
+                    <div class="folder-icon" onclick="openFolder('health', 'Salud Ocupacional')" style="cursor: pointer; text-align: center; transition: transform 0.2s;">
+                        <div style="color: var(--primary-color); margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"><span class="material-symbols-outlined" style="font-size: 120px; font-variation-settings: 'FILL' 1;">health_and_safety</span></div>
+                        <div style="font-weight: 600; color: #333; font-size: 14px; background: rgba(255,255,255,0.7); padding: 5px; border-radius: 5px;">Salud Ocupacional</div>
+                    </div>
+                </div>
+                
+                <div id="all-games-hidden" style="display: none;">
+<div class="grid-container" id="campaign-grid"
+
+                    style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; margin-bottom: 50px;">
+                    <!-- 1. Spreadsheet Saga -->
+                    <a href="./spreadsheet-saga/index.html" class="system-card" data-folder="ops" data-game="spreadsheet">
+                        <div class="icon"><span class="material-symbols-outlined" style="font-size: 36px;">table_chart</span></div>
+                        <div class="card-title">Cierre Fiscal</div>
+                        <div class="card-desc">Balance Anual Consolidado</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 2. System Crash -->
+                    <a href="./system-crash/index.html" class="system-card" data-folder="it" data-game="systemcrash">
+                        <div class="icon" style="background: #ffcdd2;"><span class="material-symbols-outlined" style="font-size: 36px;">build_circle</span></div>
+                        <div class="card-title">Mantenimiento</div>
+                        <div class="card-desc">Desfragmentación Crítica</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 3. Angry Interns -->
+                    <a href="./angry-interns/index.html" class="system-card" data-folder="rrhh" data-game="angryinterns">
+                        <div class="icon" style="background: #fff9c4;"><span class="material-symbols-outlined" style="font-size: 36px;">engineering</span></div>
+                        <div class="card-title">Auditoría</div>
+                        <div class="card-desc">Pruebas de Resistencia</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 4. Hot Desking -->
+                    <a href="./chair-race/index.html" class="system-card" data-folder="rrhh" data-game="chair">
+                        <div class="icon" style="background: #ffccbc;"><span class="material-symbols-outlined" style="font-size: 36px;">event_seat</span></div>
+                        <div class="card-title">Hot Desking</div>
+                        <div class="card-desc">Juego de la Silla</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 5. Coffee Run -->
+                    <a href="./coffee-run/index.html" class="system-card" data-folder="ops" data-game="coffee">
+                        <div class="icon" style="background: #cfd8dc;"><span class="material-symbols-outlined" style="font-size: 36px;">local_cafe</span></div>
+                        <div class="card-title">Suministros</div>
+                        <div class="card-desc">Protocolo Cafeína</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+
+                    <!-- 6. Meeting Tetris -->
+                    <a href="./meeting-tetris/index.html" class="system-card" data-folder="comms" data-game="tetris">
+                        <div class="icon" style="background: #e8f0fe;"><span class="material-symbols-outlined" style="font-size: 36px;">event_available</span></div>
+                        <div class="card-title">Agenda</div>
+                        <div class="card-desc">Optimización de Tiempos</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 7. Salary Negotiator -->
+                    <a href="./salary-negotiator/index.html" class="system-card" data-folder="rrhh" data-game="salary">
+                        <div class="icon" style="background: #a5d6a7;"><span class="material-symbols-outlined" style="font-size: 36px;">attach_money</span></div>
+                        <div class="card-title">Salarial</div>
+                        <div class="card-desc">Revisión de Categoría</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 8. Terminal Tycoon -->
+                    <a href="./terminal-tycoon/index.html" class="system-card" data-folder="it" data-game="terminal">
+                        <div class="icon"><span class="material-symbols-outlined" style="font-size: 36px;">terminal</span></div>
+                        <div class="card-title">Servidores</div>
+                        <div class="card-desc">Mantenimiento Infra.</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 9. Java Corp -->
+                    <a href="./java-corp/index.html" class="system-card" data-folder="it" data-game="java">
+                        <div class="icon"><span class="material-symbols-outlined" style="font-size: 36px;">code</span></div>
+                        <div class="card-title">Portal INAP</div>
+                        <div class="card-desc">Capacitación (Java)</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 10. Sudoku (As Logic/Performance Game) -->
+                    <a href="./sudoku/index.html" class="system-card" data-folder="ops" data-game="sudoku">
+                        <div class="icon" style="background: #e8f5e9;"><span class="material-symbols-outlined" style="font-size: 36px;">grid_on</span></div>
+                        <div class="card-title">Conciliación</div>
+                        <div class="card-desc">Integridad de Datos</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+
+                    <!-- 11. Math Exam -->
+                    <a href="./math-exam/index.html" class="system-card" data-folder="ops" data-game="math">
+                        <div class="icon" style="background: #fdfefe; border: 1px solid #ccc;"><span class="material-symbols-outlined" style="font-size: 36px;">calculate</span></div>
+                        <div class="card-title">Certificación</div>
+                        <div class="card-desc">Evaluación Semestral</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 12. English I -->
+                    <a href="./english-class/index.html" class="system-card" data-folder="rrhh" data-game="english">
+                        <div class="icon" style="background: #e1f0fa;"><span class="material-symbols-outlined" style="font-size: 36px;">language</span></div>
+                        <div class="card-title">Localización</div>
+                        <div class="card-desc">Control de Calidad</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 13. Lab Git -->
+                    <a href="./lab-git/index.html" class="system-card" data-folder="it" data-game="git">
+                        <div class="icon" style="background: #252526; color: white; border: 1px solid #555;"><span class="material-symbols-outlined" style="font-size: 36px;">account_tree</span></div>
+                        <div class="card-title">Versiones</div>
+                        <div class="card-desc">Gestor de Ramas</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 14. Admin DB -->
+                    <a href="./db-admin/index.html" class="system-card" data-folder="it" data-game="sql">
+                        <div class="icon" style="background: #2f3640; color: #fff;"><span class="material-symbols-outlined" style="font-size: 36px;">database</span></div>
+                        <div class="card-title">Reportes</div>
+                        <div class="card-desc">Generador SQL</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                    <!-- 15. Prog Web -->
+                    <a href="./prog-web/index.html" class="system-card" data-folder="it" data-game="web">
+                        <div class="icon" style="background: #e65100; color: white;"><span class="material-symbols-outlined" style="font-size: 36px;">html</span></div>
+                        <div class="card-title">Plantillas</div>
+                        <div class="card-desc">Editor CMS</div>
+                        <div class="card-progress-container">
+                            <div class="card-progress-bar" style="width:0%"></div>
+                        </div>
+                        <div class="card-progress-text"><span>Avance</span><span>0%</span></div>
+                    </a>
+                </div>
+
+                <!-- SECTION 2: SYSTEM UTILITIES / ARCADE (10 Games - 5x2 Grid) -->
+                
+
+                <div class="grid-container" id="arcade-grid"
+                    style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%;">
+                    <!-- 1. Inbox Zero -->
+                    <a href="./inbox-zero/index.html" class="system-card" data-folder="comms" data-arcade="inbox">
+                        <div class="icon"><span class="material-symbols-outlined" style="font-size: 36px;">mail</span></div>
+                        <div class="card-title">Entradas</div>
+                        <div class="card-desc">Mesa de Entrada</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Pal/Min</div>
+                    </a>
+                    <!-- 2. Slack-a-Mole -->
+                    <a href="./slack-mole/index.html" class="system-card" data-folder="comms" data-arcade="slack">
+                        <div class="icon"><span class="material-symbols-outlined" style="font-size: 36px;">chat</span></div>
+                        <div class="card-title">Chat Interno</div>
+                        <div class="card-desc">Notificaciones</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Leídos</div>
+                    </a>
+                    <!-- 3. The Shredder -->
+                    <a href="./secure-delete/index.html" class="system-card" data-folder="ops" data-arcade="shredder">
+                        <div class="icon" style="background: #ffebee;"><span class="material-symbols-outlined" style="font-size: 36px;">delete_forever</span></div>
+                        <div class="card-title">Destructor</div>
+                        <div class="card-desc">Cumplimiento GDPR</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> MBs</div>
+                    </a>
+                    <!-- 4. Printer Panic -->
+                    <a href="./printer-panic/index.html" class="system-card" data-folder="ops" data-arcade="printer">
+                        <div class="icon" style="background: #e3f2fd;"><span class="material-symbols-outlined" style="font-size: 36px;">print</span></div>
+                        <div class="card-title">Impresora</div>
+                        <div class="card-desc">Cola de Impresión</div>
+                        <div class="card-score-badge">⚡ <span class="score-val">0</span> Trabajos</div>
+                    </a>
+                    <!-- 5. Update Manager -->
+                    <a href="./update-manager/index.html" class="system-card" data-folder="it" data-arcade="update">
+                        <div class="icon" style="background: #e8f5e9;"><span class="material-symbols-outlined" style="font-size: 36px;">security_update_good</span></div>
+                        <div class="card-title">Defender</div>
+                        <div class="card-desc">Actualizaciones</div>
+                        <div class="card-score-badge">⚡ <span class="score-val">0</span>% Seguro</div>
+                    </a>
+                    <!-- 6. Expediente X -->
+                    <a href="./expediente-x/index.html" class="system-card" data-folder="ops" data-arcade="expediente">
+                        <div class="icon" style="background: #fff3e0;"><span class="material-symbols-outlined" style="font-size: 36px;">folder_special</span></div>
+                        <div class="card-title">Archivador</div>
+                        <div class="card-desc">Legajos Perdidos</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Archivos</div>
+                    </a>
+                    <!-- 7. Tab Hoarder -->
+                    <a href="./tab-hoarder/index.html" class="system-card" data-folder="health" data-arcade="tabs">
+                        <div class="icon" style="background: #e8f0fe;"><span class="material-symbols-outlined" style="font-size: 36px;">tab_unselected</span></div>
+                        <div class="card-title">Recursos</div>
+                        <div class="card-desc">Gestión de Memoria</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Ciclos</div>
+                    </a>
+                    <!-- 8. Mute All -->
+                    <a href="./mute-all/index.html" class="system-card" data-folder="comms" data-arcade="mute">
+                        <div class="icon" style="background: #e0f2f1;"><span class="material-symbols-outlined" style="font-size: 36px;">mic_off</span></div>
+                        <div class="card-title">Sala Conf.</div>
+                        <div class="card-desc">Moderación</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Interv.</div>
+                    </a>
+                    <!-- 9. Voodoo Ticket -->
+                    <a href="./voodoo-ticket/index.html" class="system-card" data-folder="health" data-arcade="voodoo">
+                        <div class="icon" style="background: #e1bee7;"><span class="material-symbols-outlined" style="font-size: 36px;">assignment_late</span></div>
+                        <div class="card-title">Incidencias</div>
+                        <div class="card-desc">Tickets de Soporte</div>
+                        <div class="card-score-badge">ID: Tickets</div>
+                    </a>
+                    <!-- 10. VPN Tuner -->
+                    <a href="./vpn-tuner/index.html" class="system-card" data-folder="it" data-arcade="vpn">
+                        <div class="icon" style="background: #000; color: #0f0; border: 1px solid #0f0;"><span class="material-symbols-outlined" style="font-size: 36px;">wifi_tethering</span></div>
+                        <div class="card-title">Conectividad</div>
+                        <div class="card-desc">Diagnóstico de Red</div>
+                        <div class="card-score-badge">ID: <span class="score-val">0</span> Mbps</div>
+                    </a>
+                    <!-- 11. Whack-a-boss -->
+                    <a href="./whack-a-boss/index.html" class="system-card" data-folder="rrhh" data-arcade="whackboss">
+                        <div class="icon" style="background: #ef9a9a;"><span class="material-symbols-outlined" style="font-size: 36px;">pan_tool</span></div>
+                        <div class="card-title">RRHH VIP</div>
+                        <div class="card-desc">Terapia Anti-Estrés</div>
+                        <div class="card-score-badge">Puntos: <span class="score-val">0</span></div>
+                    </a>
+                    <!-- 12. Paper Sniper -->
+                    <a href="./paper-sniper/index.html" class="system-card" data-folder="ops" data-arcade="papersniper">
+                        <div class="icon" style="background: #fff59d;"><span class="material-symbols-outlined" style="font-size: 36px;">send</span></div>
+                        <div class="card-title">Presentador</div>
+                        <div class="card-desc">Reunión Sinergia</div>
+                        <div class="card-score-badge">Puntos: <span class="score-val">0</span></div>
+                    </a>
+                    <!-- 13. Coffee Spiller -->
+                    <a href="./coffee-spiller/index.html" class="system-card" data-folder="health" data-arcade="coffeespiller">
+                        <div class="icon" style="background: #bcaaa4;"><span class="material-symbols-outlined" style="font-size: 36px;">water_drop</span></div>
+                        <div class="card-title">Tintorería</div>
+                        <div class="card-desc">Catástrofe de Café</div>
+                        <div class="card-score-badge">Puntos: <span class="score-val">0</span></div>
+                    </a>
+                    <!-- 14. Escape from Micromanager -->
+                    <a href="./micromanager/index.html" class="system-card" data-folder="health" data-arcade="micromanager">
+                        <div class="icon" style="background: #90caf9;"><span class="material-symbols-outlined" style="font-size: 36px;">directions_run</span></div>
+                        <div class="card-title">Escape</div>
+                        <div class="card-desc">Del Micromanager</div>
+                        <div class="card-score-badge">Récord: <span class="score-val">0</span>m</div>
+                    </a>
+                    <!-- 15. Muñeco Antiestrés (Kick the Boss) -->
+                    <a href="./kick-the-boss/index.html" class="system-card" data-folder="rrhh" data-arcade="kickboss">
+                        <div class="icon" style="background: #ef9a9a;"><span class="material-symbols-outlined" style="font-size: 36px;">sports_martial_arts</span></div>
+                        <div class="card-title">Muñeco</div>
+                        <div class="card-desc">Antiestrés</div>
+                        <div class="card-score-badge">Golpes: <span class="score-val">0</span></div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+        <!-- Right Sidebar Navigation -->
+        <aside class="right-sidebar">
+            <div class="weather-widget" title="Haz clic en los textos para editar" style="cursor: text;" contenteditable="true" onblur="if(window.saveInlineWeather) saveInlineWeather();">
+                <h3 id="inline-weather-title">San Luis Capital</h3>
+                <div class="temp" id="inline-weather-temp">24°C</div>
+                <div class="desc" id="inline-weather-desc">Soleado</div>
+            </div>
+
+            <div class="widgets-container">
+                <!-- Calendar Widget -->
+                <div id="calendar-widget" class="calendar-widget" title="Clic para ver días hasta vacaciones">
+                    <div class="cal-header" id="cal-month">ENE</div>
+                    <div class="cal-body" id="cal-day">12</div>
+                    <div class="cal-label" id="cal-label">HOY</div>
+                </div>
+
+                <!-- Clock Widget -->
+                <div id="clock-container" class="clock-widget"
+                    title="Clic: Ver tiempo restante | Doble Clic: Configurar hora">
+                    <div id="clock-time">00:00:00</div>
+                    <div id="clock-label">Hora Actual</div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    
+    <!-- Folder Modal -->
+    <div id="folder-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content corporate-panel" style="width: 85%; max-width: 1100px; max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="panel-header" id="folder-modal-title" style="font-size: 18px; padding: 15px; display: flex; justify-content: space-between; align-items: center; background: var(--primary-color); color: white;">
+                <span>📂 Carpeta</span>
+                <span class="close-btn" style="cursor: pointer; font-size: 24px; line-height: 1;" onclick="document.getElementById('folder-modal').style.display='none'">×</span>
+            </div>
+            <div class="folder-content" style="padding: 25px; overflow-y: auto; background: #f4f6f8; flex: 1;">
+                <div id="folder-games-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;">
+                    <!-- Games dynamically injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content corporate-panel" style="width: 500px; max-width: 90%;">
+            <div class="panel-header" style="background: var(--primary-color); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="display:flex; align-items:center; gap:8px;"><span class="material-symbols-outlined">help</span> Guía del Sistema</span>
+                <span class="close-btn" style="cursor: pointer; font-size: 24px; line-height: 1;" onclick="document.getElementById('help-modal').style.display='none'">×</span>
+            </div>
+            <div style="padding: 25px; font-size: 14px; line-height: 1.6; color: #414242; background: #fff;">
+                <h4 style="margin-top:0; color:var(--primary-color); display:flex; align-items:center; gap:5px;"><span class="material-symbols-outlined" style="font-size:18px;">dashboard</span> ¿Qué es este portal?</h4>
+                <p>Bienvenido al <strong>Portal de Autogestión</strong>. Explora las carpetas corporativas para encontrar simuladores encubiertos ("Office Games").</p>
+                
+                <h4 style="margin-top:15px; color:var(--primary-color); display:flex; align-items:center; gap:5px;"><span class="material-symbols-outlined" style="font-size:18px;">palette</span> Personalización (Camuflaje Total)</h4>
+                <p>Haz clic en el <strong>avatar con tu inicial</strong> (arriba a la derecha) o haz doble clic en el reloj para configurar el portal entero. Podés <strong>cambiar el nombre de la empresa, colores institucionales, logo y hasta la fecha de tus vacaciones</strong> para que el portal sea idéntico a la intranet de tu lugar de trabajo actual. Además, el bloque del <strong>clima es editable</strong> con solo hacer clic sobre sus textos.</p>
+
+                <h4 style="margin-top:15px; color:var(--primary-color); display:flex; align-items:center; gap:5px;"><span class="material-symbols-outlined" style="font-size:18px;">sports_esports</span> Dinámica de Privacidad (El "Modo Jefe")</h4>
+                <p>Si algún superior se acerca mientras estás jugando, simplemente <strong>presioná la tecla ESCAPE (Esc)</strong> en cualquier momento. La pantalla cambiará instantáneamente a una hoja de cálculo realista de Microsoft Excel (Libro1). Volvé a presionar "Escape" cuando el peligro pase.</p>
+                
+                <h4 style="margin-top:15px; color:var(--primary-color); display:flex; align-items:center; gap:5px;"><span class="material-symbols-outlined" style="font-size:18px;">trending_up</span> Puntos de Productividad</h4>
+                <p>Completar "tareas administrativas" (los juegos) genera <strong>Puntos de Productividad</strong> consolidados. Tu desempeño en cada mini-juego actualizará automáticamente tu <em>Categoría</em> funcional y sumará experiencia en tu Ficha de Agente en la barra lateral izquierda.</p>
+                
+                <div style="margin-top:30px; text-align:center;">
+                    <button class="save-btn" style="width: auto; padding: 10px 30px;" onclick="document.getElementById('help-modal').style.display='none'">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="settings-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content corporate-panel">
+            <div class="panel-header">CONFIGURACIÓN DEL PORTAL
+                <span class="close-btn"
+                    onclick="document.getElementById('settings-modal').style.display='none'">×</span>
+            </div>
+
+            <div class="settings-form">
+                <div class="form-group">
+                    <label>Institución / Empresa</label>
+                    <input type="text" id="input-title-main" placeholder="Ej: Dunder Mifflin">
+                </div>
+                <div class="form-group">
+                    <label>Departamento / Área</label>
+                    <input type="text" id="input-title-sub" placeholder="Ej: Ventas Regionales">
+                </div>
+                <div class="form-group">
+                    <label>Logo (Emoji)</label>
+                    <input type="text" id="input-escudo" placeholder="Ej: 🏢" maxlength="4">
+                </div>
+
+                <hr style="opacity:0.2; margin: 15px 0;">
+
+                <div class="form-group">
+                    <label>Nombre del Agente</label>
+                    <input type="text" id="input-agent-name" placeholder="Ej: Jim Halpert">
+                </div>
+                <div class="form-group">
+                    <label>Puesto / Rol</label>
+                    <input type="text" id="input-agent-role" placeholder="Ej: Representante de Ventas">
+                </div>
+                <div class="form-group">
+                    <label>Inicial Avatar (1 Letra)</label>
+                    <input type="text" id="input-avatar" placeholder="Ej: J" maxlength="2">
+                </div>
+
+                <hr style="opacity:0.2; margin: 15px 0;">
+
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>Color Principal</label>
+                        <input type="color" id="input-theme-primary"
+                            style="height: 35px; padding: 2px; cursor: pointer;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Color Detalle</label>
+                        <input type="color" id="input-theme-accent"
+                            style="height: 35px; padding: 2px; cursor: pointer;">
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 2;">
+                        <label>Motivo del Conteo (Ej: Vacaciones)</label>
+                        <input type="text" id="input-vacation-name" placeholder="Día Libre, Cumpleaños..."
+                            maxlength="15">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Fecha Límite</label>
+                        <input type="date" id="input-vacation-date">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Horario de Salida</label>
+                    <input type="time" id="input-exit-time">
+                </div>
+
+                <hr style="opacity:0.2; margin: 15px 0;">
+
+                <div class="form-group">
+                    <label>Mensaje de Novedades</label>
+                    <textarea id="input-welcome-text" rows="2" placeholder="Ej: Novedades semanales..."></textarea>
+                </div>
+
+                <button class="save-btn" onclick="saveSettings()">Guardar Configuración</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Screen Overlay -->
+    <div id="boss-screen" class="hidden">
+        <div class="fake-excel-header">
+            <span>📊 Libro1 - Excel</span>
+            <div class="window-controls">_ ▢ X</div>
+        </div>
+        <div class="fake-excel-ribbon">Archivo | Inicio | Insertar | Diseño | Fórmulas | Datos | Revisar | Vista</div>
+        <table class="fake-excel-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <td>Q1 Ingresos</td>
+                    <td>$45,000</td>
+                    <td>+12%</td>
+                    <td>Completado</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>Q2 Proyección</td>
+                    <td>$52,000</td>
+                    <td>+15%</td>
+                    <td>En Revisión</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>Gastos Operativos</td>
+                    <td>$12,500</td>
+                    <td>-3%</td>
+                    <td>Estable</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>Mantenimiento</td>
+                    <td>$4,200</td>
+                    <td></td>
+                    <td>Pendiente</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>5</th>
+                    <td><strong>TOTAL NETO</strong></td>
+                    <td><strong>$80,300</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>6</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>7</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>8</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>9</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>10</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="launcher.js"></script>
+</body>
+
+</html>
