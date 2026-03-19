@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muñeco Antiestrés - Office Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+            <div id="start-screen" class="overlay-screen" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:50; background:rgba(0,0,0,0.8); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white;">
+                <h2>Instrucciones</h2>
+                <div style="background:#fff; color:#333; padding:20px; border-radius:10px; max-width:400px; text-align:center; margin-bottom:20px;">
+                    <p>¡Libera tu estrés arrastrando al muñeco y dándole una paliza virtual!</p>
+                    <p>Haz clic y arrástralo rápidamente para hacerlo volar por la oficina.</p>
+                </div>
+                <button onclick="document.getElementById('start-screen').style.display='none'" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#e01e5a; color:white; border:none; border-radius:5px;">COMENZAR TERAPIA</button>
+            </div>
+            
+        <!-- Header -->
+        <header class="game-header">
+            <div class="titles">
+                <h1>Muñeco Antiestrés</h1>
+                <h2>Personaliza a tu jefe y descárgate</h2>
+            </div>
+            <div class="stats">
+            </div>
+            <a href="../index.html" class="btn-return">🔙 Menú Principal</a>
+        </header>
+
+        <div class="game-layout">
+            <!-- Left Sidebar: Character Creation -->
+            <aside class="sidebar creation-panel" id="creation-panel">
+                <h3>🛠️ Arma a tu Jefe</h3>
+                
+                <div class="picker-section">
+                    <label>Rostro:</label>
+                    <div class="emoji-grid" id="face-grid">
+                        <div class="emoji-choice selected">😠</div>
+                        <div class="emoji-choice">😈</div>
+                        <div class="emoji-choice">🥸</div>
+                        <div class="emoji-choice">😤</div>
+                        <div class="emoji-choice">🤡</div>
+                        <div class="emoji-choice">👽</div>
+                        <div class="emoji-choice">🧛‍♂️</div>
+                        <div class="emoji-choice">🐷</div>
+                    </div>
+                </div>
+
+                <button id="start-btn" class="btn-primary" style="margin-top: 20px;">¡A DESCARGAR ESTRÉS!</button>
+            </aside>
+
+            <!-- Right Sidebar: Armory (Hidden initially) -->
+            <aside class="sidebar weapon-panel hidden" id="weapon-panel">
+                <h3>⚔️ Armería</h3>
+                <p class="armory-hint">Selecciona tu arma y haz clic en el muñeco.</p>
+                <div class="weapon-grid" id="weapon-grid" style="overflow-y: auto; overflow-x: hidden; padding-right: 5px;">
+                    <button class="weapon-btn selected" data-weapon="punch">🥊 Golpear</button>
+                    <button class="weapon-btn" data-weapon="tomato">🍅 Tomatazo</button>
+                    <button class="weapon-btn" data-weapon="coffee">☕ Café</button>
+                    <button class="weapon-btn" data-weapon="pin">📌 Chinche</button>
+                    <button class="weapon-btn" data-weapon="postit">📝 Post-it</button>
+                    <button class="weapon-btn" data-weapon="stapler">🖇️ Engrapar</button>
+                    <button class="weapon-btn" data-weapon="airplane">✈️ Avión</button>
+                    <button class="weapon-btn" data-weapon="keyboard">⌨️ Teclazo</button>
+                    <button class="weapon-btn" data-weapon="extinguisher">🧯 Extintor</button>
+                    <button class="weapon-btn" data-weapon="cactus">🌵 Cactus</button>
+                </div>
+                <div class="actions-grid">
+                    <button id="clear-btn" class="btn-secondary">🧽 Limpiar</button>
+                    <button id="edit-btn" class="btn-secondary">🔄 Cambiar Jefe</button>
+                </div>
+            </aside>
+
+            <!-- Main Sandbox -->
+            <main class="sandbox-area" id="game-area">
+                <!-- Stress Meter -->
+                <div class="stress-container hidden" id="stress-container">
+                    <div class="stress-label">Nivel de Estrés: <span id="stress-text">0%</span></div>
+                    <div class="stress-bar-bg">
+                        <div class="stress-bar-fill" id="stress-bar"></div>
+                    </div>
+                </div>
+
+                <div id="physics-wrapper">
+                    <div id="dummy" class="dummy">
+                        <!-- Physical Limbs -->
+                        <div id="dummy-arm-l" class="dummy-arm left"></div>
+                        <div id="dummy-arm-r" class="dummy-arm right"></div>
+                        <div id="dummy-leg-l" class="dummy-leg left"></div>
+                        <div id="dummy-leg-r" class="dummy-leg right"></div>
+
+                        <!-- Core Body -->
+                        <div id="dummy-face" class="dummy-face">😠</div>
+                        <div id="dummy-body" class="dummy-torso"></div>
+                        
+                        <!-- Marks -->
+                        <div id="marks-container" class="marks-container"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+    </div>
+
+    <!-- Boss Key Screen -->
+    <div id="boss-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#f3f2f1; z-index:9999; font-family: 'Segoe UI', Tahoma, sans-serif; overflow-y:auto; overflow-x:hidden;">
+        <div style="background:#2b579a; color:white; padding:10px 20px; display:flex; justify-content:space-between; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <div style="display:flex; align-items:center;">
+                <span style="font-weight:bold; font-size:18px; margin-right:20px; background:#1e3e6b; padding:2px 8px; border-radius:3px;">W</span>
+                <span>Informe_Ejecutivo_Q3.docx - Word</span>
+            </div>
+            <div style="letter-spacing:10px; cursor:default;">_ ▢ X</div>
+        </div>
+        <div style="background:#f3f2f1; padding:8px 20px; border-bottom:1px solid #ccc; font-size:13px; color:#444; display:flex; gap:20px;">
+            <span style="color:#2b579a; font-weight:bold; border-bottom:2px solid #2b579a; padding-bottom:5px;">Inicio</span>
+            <span>Insertar</span>
+            <span>Diseño</span>
+            <span>Disposición</span>
+            <span>Referencias</span>
+            <span>Correspondencia</span>
+            <span>Revisar</span>
+            <span>Vista</span>
+        </div>
+        <div style="width: 800px; min-height: 1056px; background: white; margin: 30px auto; padding: 80px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); box-sizing: border-box; cursor: text;">
+            <div style="display:flex; justify-content:space-between; color:#999; font-size:11px; margin-bottom: 50px;">
+                <span>CONFIDENCIAL - USO INTERNO</span>
+                <span>Página 1 de 14</span>
+            </div>
+            
+            <h1 style="color:#2b579a; text-align:center; margin-bottom: 40px; font-weight:300; font-size:32px;">Análisis de Sinergias Operativas y Rendimiento Estratégico</h1>
+            
+            <h3 style="color:#2b579a; border-bottom:1px solid #ccc; padding-bottom:5px; margin-top:30px;">1. Resumen Ejecutivo</h3>
+            <p style="text-align:justify; line-height: 1.8; margin-bottom: 20px; font-size:15px; color:#222;">El presente informe detalla exhaustivamente la progresión de las iniciativas de reestructuración horizontal durante el último trimestre fiscal. Se ha observado un incremento sustancial en el paradigma de la proactividad interdepartamental, consolidando nuestras métricas de retención de talento en un 14.8% por encima de la media del sector corporativo. Las estrategias de "team building" han co-generado resultados positivos medibles.</p>
+
+            <h3 style="color:#2b579a; border-bottom:1px solid #ccc; padding-bottom:5px; margin-top:30px;">2. Metodología de Implementación</h3>
+            <p style="text-align:justify; line-height: 1.8; margin-bottom: 20px; font-size:15px; color:#222;">A través de un enfoque holístico de 360 grados, el equipo de gestión ha desplegado múltiples herramientas heurísticas para apalancar el desarrollo sostenible. El comité directivo propone re-vectorizar el flujo de trabajo ágil ("agile workflow") integrando KPIs dinámicos que permitan una monitorización en tiempo real de los entregables clave (deliverables).</p>
+
+            <div style="background:#f9f9f9; border-left:4px solid #2b579a; padding:15px 20px; margin: 30px 0; font-style:italic; color:#555; font-size:15px;">
+                "La innovación disruptiva no es un hito aislado, sino un proceso iterativo de optimización constante y empoderamiento de los recursos humanos hacia una meta compartida de retorno de inversión (ROI)."<br><br><span style="font-weight:bold; font-style:normal;">- Comité de Dirección Estratégica.</span>
+            </div>
+
+            <h3 style="color:#2b579a; border-bottom:1px solid #ccc; padding-bottom:5px; margin-top:30px;">3. Próximos Pasos (Q4)</h3>
+            <ul style="line-height:2.2; margin-bottom: 20px; font-size:15px; color:#222; padding-left:20px;">
+               <li>Sinergizar canales de comunicación para mitigar el ancho de banda desperdiciado.</li>
+               <li>Democratizar el acceso a la base de datos documental.</li>
+               <li>Capitalizar los activos intelectuales emergentes.</li>
+               <li>Pilotear el programa beta de evaluación comparativa (benchmarking) estructural.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
