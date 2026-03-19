@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal_Hacker.exe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/e/ea/Network_component_icon.svg">
+</head>
+<body>
+    <div id="start-screen-mod" class="overlay-screen" style="position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:99998; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white;">
+        <h2>Instrucciones del Simulador</h2>
+        <div style="background:#fff; color:#333; padding:20px; border-radius:10px; max-width:400px; text-align:center; margin-bottom:20px;">
+            <p>Deberás completar esta tarea corporativa demostrando tu proactividad y sinergia.</p>
+            <p>Utiliza el ratón o el teclado según corresponda para interactuar con la consola, formularios o elementos en pantalla.</p>
+        </div>
+        <button onclick="document.getElementById('start-screen-mod').style.display='none'" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#354393; color:white; border:none; border-radius:5px; font-weight:bold;">COMENZAR TAREA</button>
+    </div>
+    
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+    <div class="terminal-container" id="terminal">
+        <div class="header">
+            <div class="sys-status blink-slow" id="status-text">[ ! ] VPN DESCONECTADA - LÍNEA SEGURA CAÍDA</div>
+            <div class="sys-timer">TIEMPO LÍMITE: <span id="time-display">45</span>s</div>
+            <div class="sys-score">PUNTAJE: <span id="score-val">0</span></div>
+        </div>
+
+        <div class="log-window" id="log-output">
+            <p>Iniciando secuencia de arranque...</p>
+            <p style="color:red;">FATAL: Tiempo de espera agotado para 10.58.12.199.</p>
+            <p>Teclea los comandos de anulación exactamente para restaurar la conexión.</p>
+        </div>
+
+        <div class="target-container">
+            <p class="target-label">ANULACIÓN DE SISTEMA REQUERIDA:</p>
+            <h2 id="target-cmd">ipconfig /renew</h2>
+        </div>
+
+        <div class="input-container">
+            <span class="prompt">root@vpn-gateway:~#</span>
+            <span class="user-typing" id="user-input"></span><span class="cursor blink-fast">_</span>
+        </div>
+    </div>
+
+    <!-- Boss Key -->
+    <div id="boss-overlay" class="hidden" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:999999; background:#fff; color:black; padding:20px; font-family:Arial, sans-serif; box-sizing:border-box;">
+        <h3>Configuración de Red</h3>
+        <hr>
+        <div style="display:flex; gap:20px;">
+            <div style="width:200px;">
+                <p>Ethernet</p>
+                <p>Wi-Fi</p>
+                <p style="background:#ddd;">VPN</p>
+                <p>Dial-up</p>
+            </div>
+            <div>
+                <p><strong>VPN Corporativa</strong></p>
+                <p>Estado: Conectado</p>
+                <p>Dirección IP: 10.58.12.199</p>
+                <p>Subnet Mask: 255.255.255.0</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

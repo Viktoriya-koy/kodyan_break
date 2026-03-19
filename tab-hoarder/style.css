@@ -1,0 +1,90 @@
+body, html {
+    margin: 0; padding: 0; height: 100%; overflow: hidden;
+    font-family: 'Tahoma', 'Segoe UI', Arial, sans-serif;
+    user-select: none;
+}
+
+.desktop {
+    width: 100%; height: calc(100vh - 40px);
+    background-color: #008080; /* Classic Win95 Teal */
+    position: relative;
+    overflow: hidden;
+}
+
+.taskbar {
+    height: 40px; background-color: #c0c0c0;
+    border-top: 2px solid #fff;
+    display: flex; align-items: center; padding: 0 10px;
+    box-shadow: inset 1px 1px #dfdfdf, 0 -1px #000;
+}
+
+.start-btn {
+    display: flex; align-items: center;
+    font-family: inherit; font-size: 14px; font-weight: bold;
+    padding: 2px 8px; cursor: pointer;
+    background: #c0c0c0;
+    border: 2px solid; border-color: #fff #000 #000 #fff;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.start-btn:active {
+    border-color: #000 #fff #fff #000;
+}
+
+.taskbar-status, .clock {
+    border: 2px solid; border-color: #808080 #fff #fff #808080;
+    padding: 4px 10px; font-size: 13px; color: #000;
+}
+
+.clock { font-weight: bold; margin-left: 10px; }
+
+/* The Pop-ups */
+.popup-window {
+    position: absolute;
+    width: 320px; min-height: 150px;
+    background: #c0c0c0;
+    border: 2px solid; border-color: #dfdfdf #000 #000 #dfdfdf;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+}
+
+.popup-header {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #fff; padding: 4px 6px; font-weight: bold; font-size: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+}
+
+.close-btn {
+    background: #c0c0c0; border: 2px solid; border-color: #fff #000 #000 #fff;
+    color: #000; font-weight: bold; font-size: 12px;
+    width: 18px; height: 18px; line-height: 14px;
+    text-align: center; cursor: pointer; padding: 0; margin-left: 10px;
+}
+.close-btn:active, .close-btn:hover { border-color: #000 #fff #fff #000; }
+
+.popup-body {
+    padding: 15px; text-align: center; flex: 1;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background: #fff; margin: 2px;
+    border: 1px solid #808080;
+    cursor: pointer; /* Intentionally clickable for trap */
+}
+
+.popup-body h3 { margin: 0 0 10px 0; color: #d32f2f; font-size: 18px; }
+.popup-body p { margin: 0; font-size: 14px; color: #333; }
+.popup-body img { max-width: 60px; margin-bottom: 10px; }
+
+/* Trick classes */
+.shake { animation: shakeWindow 0.1s infinite; }
+@keyframes shakeWindow {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    25% { transform: translate(-1px, -2px) rotate(-1deg); }
+    50% { transform: translate(-3px, 0px) rotate(1deg); }
+    75% { transform: translate(3px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -1px) rotate(-1deg); }
+}
+
+.fast-move { transition: left 0.2s, top 0.2s; }
+
+.hidden { display: none !important; }

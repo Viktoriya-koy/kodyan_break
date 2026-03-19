@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Consolas&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    /* VS Code Default Dark */
+    color: #d4d4d4;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 16px;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout similar a un IDE */
+.ide-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #252526;
+    border-right: 1px solid #3e3e42;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #bbbbbb;
+    text-transform: uppercase;
+}
+
+.file-tree {
+    padding: 0 10px;
+    color: #cccccc;
+    font-size: 13px;
+}
+
+.file-item {
+    padding: 3px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.file-item:before {
+    content: '📄 ';
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.file-item.active {
+    background-color: #37373d;
+    color: white;
+}
+
+/* Editor Area */
+#terminal-container {
+    flex: 1;
+    background-color: #1e1e1e;
+    padding: 20px 40px;
+    /* Margen para ver números de línea si quisiéramos */
+    overflow-y: auto;
+    font-family: 'Fira Code', monospace;
+    line-height: 1.5;
+}
+
+/* Syntax Highlighting Classes */
+.token-keyword {
+    color: #569cd6;
+}
+
+/* Blue */
+.token-string {
+    color: #ce9178;
+}
+
+/* Orange */
+.token-comment {
+    color: #6a9955;
+}
+
+/* Green */
+.token-function {
+    color: #dcdcaa;
+}
+
+/* Yellow */
+.token-number {
+    color: #b5cea8;
+}
+
+/* Light Green */
+.token-operator {
+    color: #d4d4d4;
+}
+
+/* White/Grey */
+
+#input-line {
+    display: flex;
+    margin-top: 5px;
+}
+
+#prompt {
+    color: #569cd6;
+    /* Blue prompt like posh-git */
+    margin-right: 10px;
+}
+
+.prompt-path {
+    color: #ce9178;
+}
+
+.cursor {
+    border-left: 2px solid #d4d4d4;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Status Bar Moderno */
+#status-bar {
+    height: 22px;
+    background-color: #007acc;
+    /* VS Code Blue status bar */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: 'Segoe UI', sans-serif;
+    z-index: 5;
+}
+
+.status-left,
+.status-right {
+    display: flex;
+    gap: 15px;
+}
+
+/* Boss Key Overlay (PowerShell style - Keep unchanged mostly, maybe darker) */
+#boss-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #012456;
+    color: white;
+    font-family: 'Consolas', monospace;
+    font-size: 14px;
+    z-index: 9999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Remove CRT effects */
+#crt-overlay {
+    display: none;
+}

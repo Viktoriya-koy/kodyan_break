@@ -1,0 +1,326 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #f4f5f7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.jira-header {
+    background: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #dfe1e6;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 40px;
+}
+
+.jira-logo {
+    color: #0052cc;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.jira-nav {
+    color: #42526e;
+    font-size: 14px;
+    flex: 1;
+}
+
+.create-btn {
+    background: #0052cc;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #42526e;
+    cursor: pointer;
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.tools-panel {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tools-panel h3 {
+    color: #172b4d;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.tool-btn {
+    padding: 15px;
+    text-align: left;
+    background: white;
+    border: 1px solid #dfe1e6;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #42526e;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tool-btn:hover {
+    background: #ebecf0;
+    transform: translateX(5px);
+}
+
+.tool-btn:active {
+    transform: scale(0.98);
+}
+
+.ticket-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket-card {
+    background: white;
+    width: 600px;
+    min-height: 400px;
+    padding: 30px;
+    border: 1px solid #dfe1e6;
+    border-radius: 3px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.5s;
+    transform-origin: center;
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.ticket-id {
+    color: #5e6c84;
+    font-size: 14px;
+}
+
+.priority-badge {
+    background: #ffebe6;
+    color: #de350b;
+    padding: 2px 5px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ticket-card.destroyed {
+    transform: scale(0) rotate(720deg);
+    opacity: 0;
+}
+
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #5e6c84;
+    font-size: 12px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dfe1e6;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #172b4d;
+    background: #fafbfc;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    background: #ebecf0;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    background: white;
+    border-color: #4c9aff;
+    outline: none;
+}
+
+.ticket-footer {
+    margin-top: 30px;
+    border-top: 1px solid #dfe1e6;
+    padding-top: 10px;
+    font-size: 12px;
+    color: #5e6c84;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fx-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.feedback-msg {
+    min-height: 20px;
+    color: #0052cc;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Effects Classes */
+.shaking {
+    animation: shake 0.5s infinite;
+}
+
+.burning {
+    border: 2px solid orange;
+    box-shadow: 0 0 20px orange;
+    filter: sepia(100%) hue-rotate(-30deg) saturate(300%);
+}
+
+.wet {
+    filter: blur(2px) hue-rotate(180deg);
+    transform: skewX(5deg);
+}
+
+.stamped::after {
+    content: 'REJECTED';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 80px;
+    color: rgba(255, 0, 0, 0.5);
+    font-weight: bold;
+    border: 5px solid rgba(255, 0, 0, 0.5);
+    padding: 10px;
+    pointer-events: none;
+}
+
+.shredded {
+    background: repeating-linear-gradient(90deg, transparent, transparent 10px, white 10px, white 12px);
+    opacity: 0.5;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+/* Boss Overlay */
+.hidden {
+    display: none !important;
+}
+
+#boss-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.scrum-board {
+    display: flex;
+    gap: 20px;
+}
+
+.col {
+    flex: 1;
+    background: #f4f5f7;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.card {
+    background: white;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+}

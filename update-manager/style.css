@@ -1,0 +1,295 @@
+body {
+    background: #0078d7;
+    /* Windows Blue Desktop */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+.window-frame {
+    width: 900px;
+    height: 600px;
+    background: #f2f2f2;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: white;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icon {
+    font-size: 40px;
+}
+
+.header-text h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header-text p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.window-controls {
+    margin-left: auto;
+}
+
+.window-controls button {
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.window-controls button:hover {
+    background: #eee;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 250px;
+    background: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tool-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s;
+}
+
+.tool-card:hover {
+    background: #f0f0f0;
+}
+
+.tool-card.selected {
+    border-color: #0078d7;
+    background: #e0efff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card .icon {
+    font-size: 24px;
+}
+
+.tool-card .name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.tool-card .cost {
+    margin-left: auto;
+    font-size: 12px;
+    color: #666;
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.system-status {
+    margin-top: auto;
+    background: #2d2d2d;
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.system-status h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.resource-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.highlight {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4cc2ff;
+}
+
+.game-area {
+    flex: 1;
+    padding: 30px;
+    background: #f2f2f2;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.update-bar-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.progress-track {
+    height: 20px;
+    background: #ccc;
+    border-radius: 10px;
+    /* Modern rounded */
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #0078d7;
+    transition: width 0.5s;
+}
+
+.percentage {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.grid-container {
+    background: #ddd;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 2px;
+    width: 400px;
+    height: 400px;
+    border: 2px solid #999;
+    position: relative;
+}
+
+.grid-cell {
+    background: white;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.grid-cell:hover {
+    background: #eee;
+}
+
+.core-node {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    /* Approx position logic handled in JS actually better, just styling here */
+    background: #2d2d2d;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    z-index: 10;
+}
+
+.spawner-node {
+    position: absolute;
+    top: 90px;
+    left: 40px;
+    background: #2d2d2d;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    z-index: 10;
+}
+
+/* Entities */
+.enemy {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: red;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    transition: top 0.2s linear, left 0.2s linear;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+}
+
+.projectile {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: cyan;
+    border-radius: 50%;
+    z-index: 6;
+}
+
+/* BSOD Override */
+.hidden {
+    display: none !important;
+}
+
+#bsod-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0078d7;
+    color: white;
+    z-index: 999;
+    padding: 100px;
+}
+
+.bsod-content h1 {
+    font-size: 100px;
+    margin: 0 0 20px 0;
+    font-weight: 300;
+}
+
+.bsod-content p {
+    font-size: 24px;
+    margin: 10px 0;
+}

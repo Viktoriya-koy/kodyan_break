@@ -1,0 +1,361 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #eceff1 0%, #b0bec5 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Hide default cursor over game area */
+    cursor: default; 
+}
+
+.game-container {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow: hidden;
+    position: relative;
+    /* cursor depends on playing state */
+}
+
+
+/* Header */
+.game-header {
+    background: #37474f;
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid #ef5350;
+}
+
+.titles h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.titles h2 {
+    font-size: 14px;
+    color: #b0bec5;
+    font-weight: 400;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-box {
+    background: rgba(0,0,0,0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 100px;
+}
+
+.stat-box .label {
+    display: block;
+    font-size: 11px;
+    color: #cfd8dc;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.stat-box .value {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.btn-return {
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255,255,255,0.1);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-return:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Board */
+.board-container {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 500px;
+}
+
+.controls {
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: #ef5350;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #b71c1c;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-primary:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #b71c1c;
+}
+.btn-primary:disabled {
+    background: #9e9e9e;
+    box-shadow: 0 4px 0 #616161;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: #607d8b;
+    color: white;
+    text-decoration: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 4px 0 #37474f;
+}
+.btn-secondary:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #37474f;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 140px);
+    gap: 30px;
+}
+
+.cubicle {
+    width: 140px;
+    height: 140px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 25px solid #90a4ae; /* Desktop edge */
+    box-shadow: inset 0px 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Decorating cubicle */
+.cubicle::before {
+    content: '';
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; height: 40px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.desk {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    background: #546e7a;
+    z-index: 2;
+    border-top: 5px solid #37474f;
+}
+
+/* The Boss */
+.boss {
+    font-size: 80px;
+    position: absolute;
+    bottom: -100px; /* hidden entirely */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: bottom 0.2s ease-out; /* snap up, ease down */
+    z-index: 1;
+    line-height: 1;
+}
+
+.boss.up {
+    bottom: 20px; /* popped up, resting on desk */
+    transition: bottom 0.2s ease-out; /* Slower when popping up */
+}
+
+.boss.hit {
+    bottom: 0px;
+    transform: translateX(-50%) scale(0.8) rotate(15deg);
+    filter: grayscale(100%) blur(1px);
+    transition: all 0.1s;
+}
+
+.boss.hit-wrong {
+    bottom: 0px;
+    transform: translateX(-50%) scale(0.9);
+    filter: sepia(100%) hue-rotate(300deg) saturate(300%) blur(1px); /* Red tint */
+    opacity: 0.8;
+    transition: all 0.1s;
+}
+
+/* Start Screen Overlay */
+.overlay-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.95);
+    z-index: 50; /* Below custom cursor but above board */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+    padding: 30px;
+    transition: opacity 0.3s ease, visibility 0.3s;
+}
+
+.overlay-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.overlay-screen h2 {
+    color: #37474f;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.instructions-card {
+    background: #f8f9fa;
+    padding: 20px 30px;
+    border-radius: 8px;
+    border: 1px dashed #cfd8dc;
+    margin-bottom: 30px;
+    color: #455a64;
+    font-size: 16px;
+    max-width: 500px;
+}
+
+.instructions-card p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.targets-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.target-group {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.target-group h4 {
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.boss-group h4 { color: #c62828; }
+.innocent-group h4 { color: #2e7d32; }
+
+.target-group span {
+    font-size: 24px;
+    letter-spacing: 5px;
+}
+
+
+/* Modal */
+.modal {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+    color: #c62828;
+    margin-bottom: 10px;
+}
+
+.final-score {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #37474f;
+}
+
+.high-score-msg {
+    color: #2e7d32;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Boss Screen Overlay (Fake Excel) */
+#boss-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: white; z-index: 9999;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    display: none; cursor: default;
+}
+#boss-screen.hidden { display: none !important; }
+#boss-screen:not(.hidden) { display: block !important; }
+
+.fake-excel-header {
+    background: #107c41; color: white; padding: 10px 15px;
+    display: flex; justify-content: space-between; font-size: 14px;
+}
+.fake-excel-header .window-controls { letter-spacing: 5px; }
+.fake-excel-ribbon {
+    background: #f3f2f1; border-bottom: 1px solid #e1dfdd;
+    padding: 8px 15px; font-size: 13px; color: #323130;
+}
+.fake-excel-table { width: 100%; border-collapse: collapse; font-size: 14px; color: #000; }
+.fake-excel-table th, .fake-excel-table td { border: 1px solid #e1dfdd; padding: 5px 10px; text-align: left; }
+.fake-excel-table thead th { background: #f3f2f1; font-weight: normal; text-align: center; }
+.fake-excel-table tbody th { background: #f3f2f1; font-weight: normal; width: 40px; text-align: center; }
+

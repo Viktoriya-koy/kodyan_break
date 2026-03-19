@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whack-A-Boss - Office Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <div class="titles">
+                <h1>RRHH: Control de Estrés</h1>
+                <h2>Programa Anti-Micromanagement</h2>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="label">PUNTOS</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">TIEMPO</span>
+                    <span class="value" id="time">30</span>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-return">🔙 Volver al Portal</a>
+        </header>
+
+        <main class="board-container" style="position: relative;">
+            <!-- Start Screen Overlay -->
+            <div id="start-screen" class="overlay-screen">
+                <h2>📚 Manual de Operaciones</h2>
+                <div class="instructions-card">
+                    <p>🎯 <strong>Objetivo:</strong> Tienes 30 segundos. Golpea a los <strong>Jefes</strong> para desahogarte y sumar puntos.</p>
+                    <p>🚫 <strong>Peligro:</strong> ¡Cuidado a quién le pegas! Golpear a compañeros o tirar snacks resta puntos.</p>
+                    
+                    <div class="targets-grid">
+                        <div class="target-group boss-group">
+                            <h4>🔥 OBJETIVOS (+10 pts)</h4>
+                            <span>🧛‍♂️ 🧟‍♂️ 🧔🏻‍♂️ 😡</span>
+                        </div>
+                        <div class="target-group innocent-group">
+                            <h4>🛡️ INOCENTES (-10 pts)</h4>
+                            <span>👨‍💻 👩‍💻 🍕 ☕ 🪴</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="start-btn" class="btn-primary">COMENZAR TERAPIA</button>
+            </div>
+            
+            <div class="game-board" id="board">
+                <!-- 9 Cubicles -->
+                <div class="cubicle" id="c-1">
+                    <div class="boss" data-id="1">👨‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-2">
+                    <div class="boss" data-id="2">👩‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-3">
+                    <div class="boss" data-id="3">👔</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-4">
+                    <div class="boss" data-id="4">👨‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-5">
+                    <div class="boss" data-id="5">👩‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-6">
+                    <div class="boss" data-id="6">👔</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-7">
+                    <div class="boss" data-id="7">👨‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-8">
+                    <div class="boss" data-id="8">👩‍💼</div>
+                    <div class="desk"></div>
+                </div>
+                <div class="cubicle" id="c-9">
+                    <div class="boss" data-id="9">👔</div>
+                    <div class="desk"></div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Fin del Juego Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>¡Sesión Finalizada!</h2>
+                <p>Nivel de estrés reducido bastante.</p>
+                <div class="final-score">
+                    Puntos: <span id="final-score">0</span>
+                </div>
+                <p id="high-score-msg" class="high-score-msg"></p>
+                <div class="modal-actions">
+                    <button id="restart-btn" class="btn-primary">Otra Ronda</button>
+                    <a href="../index.html" class="btn-secondary">Volver al Menú</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Screen Overlay -->
+    <div id="boss-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#201f1e; z-index:9999; font-family:'Segoe UI', Tahoma, sans-serif; overflow:hidden; display:flex; flex-direction:column;">
+        <!-- Video Grid -->
+        <div style="flex:1; padding:20px; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:20px;">
+            <div style="background:#000; border-radius:8px; position:relative; display:flex; justify-content:center; align-items:center; color:#fff; font-size:40px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <div style="background:#5c2d91; width:120px; height:120px; border-radius:50%; display:flex; justify-content:center; align-items:center;">JM</div>
+                <div style="position:absolute; bottom:15px; left:15px; font-size:14px; background:rgba(0,0,0,0.6); padding:5px 10px; border-radius:4px; display:flex; align-items:center; gap:8px;">⛔ Juan Martinez</div>
+            </div>
+            <div style="background:#000; border-radius:8px; position:relative; display:flex; justify-content:center; align-items:center; color:#fff; font-size:40px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <div style="background:#d13438; width:120px; height:120px; border-radius:50%; display:flex; justify-content:center; align-items:center;">MS</div>
+                <div style="position:absolute; bottom:15px; left:15px; font-size:14px; background:rgba(0,0,0,0.6); padding:5px 10px; border-radius:4px; display:flex; align-items:center; gap:8px;">⛔ María Sánchez</div>
+            </div>
+            <div style="background:#000; border-radius:8px; position:relative; display:flex; justify-content:center; align-items:center; color:#fff; font-size:40px; border: 3px solid #6264a7; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <div style="background:#0078d4; width:120px; height:120px; border-radius:50%; display:flex; justify-content:center; align-items:center;">CM</div>
+                <div style="position:absolute; bottom:15px; left:15px; font-size:14px; background:rgba(0,0,0,0.6); padding:5px 10px; border-radius:4px; display:flex; align-items:center; gap:8px;">🎤 Carlos M. (Presentando)</div>
+            </div>
+            <div style="background:#000; border-radius:8px; position:relative; display:flex; justify-content:center; align-items:center; color:#fff; font-size:40px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                <div style="background:#107c41; width:120px; height:120px; border-radius:50%; display:flex; justify-content:center; align-items:center;">TÚ</div>
+                <div style="position:absolute; bottom:15px; left:15px; font-size:14px; background:rgba(0,0,0,0.6); padding:5px 10px; border-radius:4px; display:flex; align-items:center; gap:8px;">⛔ Tú</div>
+            </div>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div style="background:#11100f; padding:15px 30px; border-top:1px solid #333; display:flex; justify-content:space-between; align-items:center; color:#fff; font-size:12px;">
+            <div style="font-size:16px; font-weight:bold;">01:14:23</div>
+            <div style="display:flex; gap:25px;">
+                <div style="display:flex; flex-direction:column; align-items:center; opacity:0.5; cursor:pointer;"><span style="font-size:24px; margin-bottom:5px;">⛔</span>Silenciar</div>
+                <div style="display:flex; flex-direction:column; align-items:center; opacity:0.5; cursor:pointer;"><span style="font-size:24px; margin-bottom:5px;">📷</span>Cámara</div>
+                <div style="display:flex; flex-direction:column; align-items:center; margin-left:20px; cursor:pointer;"><span style="font-size:24px; margin-bottom:5px;">⬆️</span>Compartir</div>
+                <div style="display:flex; flex-direction:column; align-items:center; margin-left:20px; cursor:pointer;"><span style="font-size:24px; margin-bottom:5px;">💬</span>Chat</div>
+                <div style="display:flex; flex-direction:column; align-items:center; margin-left:20px; cursor:pointer;"><span style="font-size:24px; margin-bottom:5px;">✋</span>Participar</div>
+            </div>
+            <div style="background:#d13438; padding:8px 20px; border-radius:4px; font-size:14px; font-weight:bold; cursor:pointer;">Salir</div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Studio Code - Project</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Icono de VS Code fake -->
+    <link rel="icon" type="image/x-icon"
+        href="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg">
+</head>
+
+<body>
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <div class="ide-container">
+        <!-- Sidebar Falso -->
+        <div class="sidebar">
+            <div class="sidebar-header">EXPLORER</div>
+            <div class="file-tree">
+                <div class="sidebar-header">OPEN EDITORS</div>
+                <div class="file-item active">game_logic.ts</div>
+                <div class="file-item">styles.scss</div>
+                <div class="sidebar-header">MY_PROJECT</div>
+                <div class="file-item">package.json</div>
+                <div class="file-item">README.md</div>
+                <div class="file-item">.gitignore</div>
+                <div class="file-item">src/</div>
+            </div>
+        </div>
+
+        <!-- Editor Area -->
+        <div id="terminal-container">
+            <div id="output">
+                <!-- Lines generadas por JS -->
+            </div>
+            <div id="input-line">
+                <span class="line-number" style="color: #858585; margin-right: 15px; font-size: 14px;">452</span>
+                <span id="current-input"></span><span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Status Bar -->
+    <div id="status-bar">
+        <div class="status-left">
+            <span>main*</span>
+            <span>0 errors, 0 warnings</span>
+            <span id="status-text">INIT</span>
+        </div>
+        <div class="status-right">
+            <span id="timer">60s</span>
+            <span id="progress-bar">0% Complete</span>
+            <span>Ln 452, Col 80</span>
+            <span>UTF-8</span>
+            <span>JavaScript</span>
+            <span>🔔</span>
+        </div>
+    </div>
+
+    <!-- Boss Key Overlay: PowerShell -->
+    <div id="boss-overlay" class="hidden">
+        <div class="powershell-header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/PowerShell_5.0_icon.png" width="16"
+                style="margin-right:5px"> Administrator: Windows PowerShell
+        </div>
+        <div class="powershell-body">
+            <div>Windows PowerShell</div>
+            <div>Copyright (C) Microsoft Corporation. All rights reserved.</div>
+            <br>
+            <div>PS C:\Users\Admin> ping google.com</div>
+            <div class="blink">_</div>
+        </div>
+    </div>
+
+    <!-- Corporate Memo (Instructions) -->
+    <div id="memo-overlay"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; justify-content:center; align-items:center;">
+        <div
+            style="background:#1e1e1e; color:#d4d4d4; width:500px; padding:20px; border:1px solid #007acc; font-family:'Consolas', monospace; position:relative; box-shadow:0 0 20px rgba(0,0,0,0.8);">
+            <div style="border-bottom:1px solid #333; margin-bottom:15px;">
+                <h3 style="margin:0 0 10px 0; color:#007acc;">SECURITY_PROTOCOL_V2.md</h3>
+            </div>
+            <p style="color:#6a9955;">// PROCEDIMIENTO PARA MANTENIMIENTO DEL SERVIDOR</p>
+            <p>Solo Personal Autorizado.</p>
+            <ul style="line-height:1.5;">
+                <li>Inicio de sesión requerido: Ingresa los comandos solicitados para autenticarte.</li>
+                <li>La velocidad es crítica: La integridad del sistema decae con el tiempo.</li>
+                <li>Precisión obligatoria: Comandos fallidos activan bloqueos de seguridad.</li>
+                <li>Objetivo: Alcanzar el estado 'Nivel 5 - IPO'.</li>
+            </ul>
+            <p style="color:#ce9178;">"Muévete rápido y rompe cosas... con seguridad."</p>
+            <button onclick="document.getElementById('memo-overlay').remove()"
+                style="display:block; width:100%; padding:10px; background:#0e639c; color:#fff; border:none; cursor:pointer; margin-top:20px; font-weight:bold;">ENTENDIDO</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
