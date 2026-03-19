@@ -1,0 +1,310 @@
+body {
+    background: #eef2f5;
+    /* Light grey office bg */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+    user-select: none;
+}
+
+.window-frame {
+    width: 1000px;
+    height: 700px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.date-nav {
+    font-size: 18px;
+    color: #3c4043;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date-nav button {
+    border: none;
+    background: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #5f6368;
+}
+
+.view-toggle button {
+    border: 1px solid #dadce0;
+    background: white;
+    padding: 5px 12px;
+    color: #3c4043;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.view-toggle button.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+    border-color: #e8f0fe;
+    font-weight: 600;
+}
+
+.window-controls {
+    margin-left: auto;
+}
+
+.window-controls button {
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #5f6368;
+    cursor: pointer;
+}
+
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #5f6368;
+}
+
+.requests-container {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    /* Ensure relative context if needed, but flex children generally behave */
+}
+
+.score-panel {
+    margin-top: 20px;
+    padding: 10px;
+    background: #e8f0fe;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1a73e8;
+    font-weight: 600;
+}
+
+.fail-bar {
+    width: 100%;
+    height: 5px;
+    background: #fff;
+    margin-top: 5px;
+    border-radius: 3px;
+}
+
+.fail-fill {
+    height: 100%;
+    width: 0%;
+    background: #ea4335;
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+
+/* Calendar Area */
+.calendar-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-header {
+    display: flex;
+    border-bottom: 1px solid #dadce0;
+    height: 40px;
+}
+
+.time-col-head {
+    width: 60px;
+    border-right: 1px solid #dadce0;
+}
+
+.day-head {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #70757a;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-right: 1px solid #dadce0;
+}
+
+.grid-body {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+    position: relative;
+    background: white;
+}
+
+.time-column {
+    width: 60px;
+    border-right: 1px solid #dadce0;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-slot {
+    height: 60px;
+    /* 1 hour */
+    font-size: 10px;
+    color: #70757a;
+    text-align: right;
+    padding-right: 8px;
+    transform: translateY(-5px);
+}
+
+.day-column {
+    flex: 1;
+    border-right: 1px solid #dadce0;
+    position: relative;
+    background-image: linear-gradient(#f1f3f4 1px, transparent 1px);
+    background-size: 100% 30px;
+}
+
+/* Event Blocks */
+.event-block {
+    position: relative;
+    /* Default in list: Relative so they stack in Flex */
+    width: 100%;
+    background: #039be5;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 11px;
+    box-sizing: border-box;
+    cursor: grab;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    flex-shrink: 0;
+    /* Prevent squashing in list */
+}
+
+.event-block.dragging {
+    opacity: 0.8;
+    cursor: grabbing;
+    pointer-events: none;
+    /* Let clicks pass through to check drop */
+    position: fixed;
+    /* Follow mouse */
+    z-index: 999;
+}
+
+.event-block.placed {
+    position: absolute;
+    /* Relative to day column */
+    left: 2px;
+    width: calc(100% - 4px);
+    cursor: default;
+    z-index: 5;
+}
+
+.event-block.placed:hover {
+    z-index: 6;
+    /* Bring to front if stacked? shouldn't stack */
+}
+
+/* Types */
+.type-normal {
+    background: #039be5;
+}
+
+/* Blue */
+.type-urgent {
+    background: #d93025;
+}
+
+/* Red */
+.type-chill {
+    background: #33b679;
+}
+
+/* Green */
+.type-fixed {
+    background: #616161;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Grey fixed */
+
+/* Boss Overlay */
+.hidden {
+    display: none !important;
+}
+
+#boss-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.event-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.input-fake {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    color: #999;
+    padding: 5px;
+}
+
+.btn-fake {
+    background: #1a73e8;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    width: fit-content;
+    margin-left: auto;
+}
