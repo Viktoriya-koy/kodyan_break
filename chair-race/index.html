@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Desking Survival</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="ui-panel">
+            <div class="stats">
+                <div>DÍA: <span id="day-display">1</span></div>
+                <div>ESTADO: <span id="status-display">☕ Descanso</span></div>
+                <div>SILLAS: <span id="chairs-display">0/0</span></div>
+            </div>
+            <button class="exit-btn" onclick="window.location.href='../index.html'">SALIR</button>
+        </div>
+
+        <div id="office-floor" class="office-floor"></div>
+
+        <div id="start-overlay" class="overlay">
+            <h1>HOT DESKING EXTREME</h1>
+            <p>La música se detiene... ¡ENCUENTRA UNA SILLA!</p>
+            <p>Flechas para moverte. Si te quedas de pie, te despiden.</p>
+            <button onclick="startGame()">INICIAR SEMANA</button>
+        </div>
+
+        <div id="end-overlay" class="overlay hidden">
+            <h1 id="end-title">FINISH!</h1>
+            <p id="end-msg">Resultado</p>
+            <button onclick="startGame()">REINTENTAR</button>
+        </div>
+
+        <!-- Boss Overlay (Fake Spreadsheet) -->
+        <div id="boss-overlay" class="hidden">
+            <div class="spreadsheet">
+                <div class="sheet-header">
+                    <div class="cell">A</div>
+                    <div class="cell">B</div>
+                    <div class="cell">C</div>
+                    <div class="cell">D</div>
+                    <div class="cell">E</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">1</div>
+                    <div class="cell">GASTOS Q1</div>
+                    <div class="cell">ENERO</div>
+                    <div class="cell">FEBRERO</div>
+                    <div class="cell">MARZO</div>
+                    <div class="cell">TOTAL</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">2</div>
+                    <div class="cell">Café</div>
+                    <div class="cell">$500</div>
+                    <div class="cell">$600</div>
+                    <div class="cell">$550</div>
+                    <div class="cell">$1650</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">3</div>
+                    <div class="cell">Papel</div>
+                    <div class="cell">$200</div>
+                    <div class="cell">$200</div>
+                    <div class="cell">$200</div>
+                    <div class="cell">$600</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">4</div>
+                    <div class="cell">Toner</div>
+                    <div class="cell">$1000</div>
+                    <div class="cell">$0</div>
+                    <div class="cell">$0</div>
+                    <div class="cell">$1000</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">5</div>
+                    <div class="cell">Sillas</div>
+                    <div class="cell">$5000</div>
+                    <div class="cell">$5000</div>
+                    <div class="cell">$2000</div>
+                    <div class="cell">$12000</div>
+                </div>
+                <div class="sheet-row">
+                    <div class="cell row-num">6</div>
+                    <div class="cell">TOTAL</div>
+                    <div class="cell">$6700</div>
+                    <div class="cell">$5800</div>
+                    <div class="cell">$2750</div>
+                    <div class="cell">$15250</div>
+                </div>
+            </div>
+            <div class="boss-hint">Presiona ESC para volver al trabajo (juego)</div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>
