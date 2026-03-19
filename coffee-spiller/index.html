@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Spiller - Office Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="titles">
+                <h1>Catástrofe de Café</h1>
+                <h2>Ruina el traje antes de la reunión</h2>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="label">NIVEL</span>
+                    <span class="value" id="level">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">PUNTOS</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">META</span>
+                    <span class="value" id="target">50</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">TIEMPO</span>
+                    <span class="value" id="time">30</span>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-return">🔙 Volver al Portal</a>
+        </header>
+
+        <main class="game-area" id="game-area">
+            
+            <!-- Pre-Fin del Juegolay -->
+            <div id="start-screen" class="overlay-screen">
+                <h2>☕ Catástrofe de Café</h2>
+                <div class="instructions-card">
+                    <p>🎯 <strong>Misión:</strong> Estás en el primer piso mirando al pasillo. ¡Lanza cafés hacia abajo haciendo clic!</p>
+                    <p>🔥 <strong>Desafío:</strong> Arruina trajes para sumar puntos (+10 JEFE). Evita manchar a colegas (-10 COLEGA).</p>
+                    <p>⏳ <strong>Niveles:</strong> Tienes 30 segundos para alcanzar los puntos de la <strong style="color:#d84315">META</strong> y pasar al siguiente nivel.</p>
+                    <p>¡El juego se vuelve más rápido y caótico en niveles altos!</p>>
+                </div>
+                <button id="start-btn" class="btn-primary">COMENZAR LA CAÍDA</button>
+            </div>
+
+            <!-- Entities will be spawned here via JS -->
+
+        </main>
+        
+        <!-- Fin del Juego Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>¡Reunión Empezada!</h2>
+                <p>El jefe llegó a su reunión...</p>
+                <div class="final-score">
+                    Trajes manchados: <span id="final-score">0</span> pts
+                </div>
+                <p id="high-score-msg" class="high-score-msg"></p>
+                <div class="modal-actions">
+                    <button id="restart-btn" class="btn-primary">Arruinar Otro Día</button>
+                    <a href="../index.html" class="btn-secondary">Huir al Menú</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Key Screen -->
+    <div id="boss-screen" class="hidden">
+        <div class="fake-excel-header">
+            <span>📊 Q3_Ventas.xlsx - Excel</span>
+            <div class="window-controls">_ ▢ X</div>
+        </div>
+        <div class="fake-excel-ribbon">Archivo | Inicio | Insertar | Diseño | Fórmulas | Datos | Revisar | Vista</div>
+        <table class="fake-excel-table">
+            <thead>
+                <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+            </thead>
+            <tbody>
+                <tr><th>1</th><td>Q1 Ingresos</td><td>$45,000</td><td>+12%</td><td>Completado</td><td></td><td></td></tr>
+                <tr><th>2</th><td>Q2 Proyección</td><td>$52,000</td><td>+15%</td><td>En Revisión</td><td></td><td></td></tr>
+                <tr><th>3</th><td>Gastos Operativos</td><td>$12,500</td><td>-3%</td><td>Estable</td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
