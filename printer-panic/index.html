@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cola de Impresión - EPSON L380 (RED)</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="start-screen-mod" class="overlay-screen" style="position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:99998; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white;">
+        <h2>Instrucciones del Simulador</h2>
+        <div style="background:#fff; color:#333; padding:20px; border-radius:10px; max-width:400px; text-align:center; margin-bottom:20px;">
+            <p>Deberás completar esta tarea corporativa demostrando tu proactividad y sinergia.</p>
+            <p>Utiliza el ratón o el teclado según corresponda para interactuar con la consola, formularios o elementos en pantalla.</p>
+        </div>
+        <button onclick="document.getElementById('start-screen-mod').style.display='none'" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#354393; color:white; border:none; border-radius:5px; font-weight:bold;">COMENZAR TAREA</button>
+    </div>
+    
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; left:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Regresar al Portal</a>
+
+
+    <div class="window-frame">
+        <div class="title-bar">
+            <div class="title-text">
+                <img src="https://img.icons8.com/color/48/printer.png" alt="icon" class="title-icon">
+                EPSON L380 (RED) - Cola de Impresión
+            </div>
+            <div class="window-controls">
+                <button class="minimize">_</button>
+                <button class="maximize">□</button>
+                <button class="close" onclick="window.location.href='../index.html'">×</button>
+            </div>
+        </div>
+
+        <div class="menu-bar">
+            <span>
+                <button onclick="window.location.href='../index.html'"
+                    style="cursor:pointer; padding: 2px 6px; font-size:11px; margin-right:10px;">👈 Portal</button>
+            </span>
+            <span>Impresora</span>
+            <span>Documento</span>
+            <span>Ver</span>
+
+            <div style="margin-left: auto; display: flex; gap: 10px; align-items: center; font-size: 11px;">
+                <label>Lote: <span id="current-lote-display" style="font-weight:bold;">1</span>/30</label>
+                <select id="printer-level-selector" onchange="changeLevel(this.value)"
+                    style="font-size: 11px; padding: 1px;">
+                    <option value="1">Junior</option>
+                    <option value="11">Semi-Senior</option>
+                    <option value="21">Senior</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <button id="btn-pause" title="Pausar Impresión">⏸️ Pausar</button>
+            <button id="btn-resume" title="Reanudar">▶️ Reanudar</button>
+            <button id="btn-cancel" title="Cancelar Tarea">❌ Cancelar </button>
+            <div class="separator"></div>
+            <div class="ink-levels">
+                <div class="ink-pot cyan" title="Cyan">
+                    <div class="ink-fill" style="height: 100%"></div>
+                </div>
+                <div class="ink-pot magenta" title="Magenta">
+                    <div class="ink-fill" style="height: 100%"></div>
+                </div>
+                <div class="ink-pot yellow" title="Yellow">
+                    <div class="ink-fill" style="height: 100%"></div>
+                </div>
+                <div class="ink-pot black" title="Black">
+                    <div class="ink-fill" style="height: 100%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="queue-header">
+            <div class="col-icon"></div>
+            <div class="col-doc">Nombre del Documento</div>
+            <div class="col-status">Estado</div>
+            <div class="col-owner">Propietario</div>
+            <div class="col-pages">Páginas</div>
+            <div class="col-size">Tamaño</div>
+        </div>
+
+        <div class="queue-list" id="queue-list">
+            <!-- Items injected by JS -->
+            <div class="queue-item active-print">
+                <div class="col-icon">📄</div>
+                <div class="col-doc">Informe_Anual_2025.pdf</div>
+                <div class="col-status">Imprimiendo...</div>
+                <div class="col-owner">Admin</div>
+                <div class="col-pages">1/45</div>
+                <div class="col-size">4.2 MB</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 30%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span id="job-count">1 documento(s) en cola</span>
+            <div class="status-right">
+                <span id="printer-status">Listo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin del Juego / Victory Overlays could go here or simple alerts -->
+    <div id="jam-overlay" class="hidden">
+        <div class="jam-box">
+            <h3>⚠️ ATASCO DE PAPEL</h3>
+            <p>La impresora se ha trabado.</p>
+            <p>Presiona <span class="key-hint">ESPACIO</span> repetidamente para desatascar.</p>
+            <div class="jam-progress">
+                <div class="jam-fill" id="jam-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="boss-overlay" class="hidden">
+        <div class="test-page-container">
+            <img src="test_page_placeholder.png" alt="Test Page" style="width: 50%; opacity: 0.8;">
+            <h1>Página de prueba de Windows</h1>
+            <p>Ha instalado correctamente su EPSON L380.</p>
+        </div>
+    </div>
+
+    <script src="game.js?v=2"></script>
+</body>
+
+</html>

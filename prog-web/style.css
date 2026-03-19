@@ -1,0 +1,222 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: #333;
+    color: #ccc;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cms-toolbar {
+    background: #2d2d2d;
+    padding: 10px 20px;
+    border-bottom: 1px solid #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #aaa;
+}
+
+.btn-publish {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.main-split {
+    flex: 1;
+    display: flex;
+}
+
+/* Code Panel */
+.code-panel {
+    width: 350px;
+    background: #222;
+    border-right: 1px solid #111;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.panel-header {
+    background: #1e1e1e;
+    padding: 10px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+.node-tree {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    color: #a9b7c6;
+}
+
+.node {
+    padding: 2px 0;
+}
+
+.indent-1 {
+    padding-left: 20px;
+}
+
+.indent-2 {
+    padding-left: 40px;
+}
+
+.indent-3 {
+    padding-left: 60px;
+}
+
+.active-node {
+    background: #214283;
+    color: #fff;
+}
+
+.styles-panel {
+    flex: 1;
+    padding: 15px;
+    background: #2b2b2b;
+    overflow-y: auto;
+}
+
+.styles-panel h3 {
+    margin: 0 0 10px 0;
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.style-rule {
+    color: #a9b7c6;
+}
+
+.selector {
+    color: #e6c07b;
+}
+
+.prop-option {
+    padding: 5px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #a9b7c6;
+    border: 1px solid transparent;
+}
+
+.prop-option:hover {
+    background: #323232;
+}
+
+.prop-option.selected {
+    background: #214283;
+    border: 1px solid #3c78d8;
+}
+
+.prop-name {
+    color: #9876aa;
+    margin-right: 5px;
+}
+
+.prop-val {
+    color: #6a8759;
+}
+
+/* Dev Note */
+.dev-note {
+    padding: 15px;
+    background: #323232;
+    color: #ccc;
+    font-size: 12px;
+    border-top: 1px solid #444;
+}
+
+#ticket-desc {
+    color: #e67e22;
+}
+
+/* Preview Panel */
+.preview-panel {
+    flex: 1;
+    background: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.preview-frame {
+    width: 100%;
+    height: 100%;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc;
+}
+
+/* FAKE SITE STYLES */
+.fake-nav {
+    background: #333;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.fake-content {
+    padding: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+#render-target {
+    background: #3498db;
+    color: white;
+    padding: 40px;
+    text-align: center;
+    margin: 20px;
+}
+
+/* Broken states (will be toggled by JS classes) */
+.broken-state-1 #render-target {
+    width: 200%;
+    /* Overflow issue */
+}
+
+.broken-state-2 #render-target {
+    display: none;
+    /* Visibility issue */
+}
+
+.broken-state-3 #render-target h1 {
+    color: #3498db;
+    /* Contrast issue (same as bg) */
+}
+
+.broken-state-4 .fake-nav {
+    position: absolute;
+    top: 200px;
+    /* Layout shift */
+}
+
+.hidden {
+    display: none !important;
+}

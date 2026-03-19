@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Sniper - Office Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header / Stats -->
+        <header class="game-header">
+            <div class="titles">
+                <h1>Capacitación Obligatoria</h1>
+                <h2>Progreso de la Presentación</h2>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="label">PUNTOS</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">TIEMPO</span>
+                    <span class="value" id="time">60</span>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-return">🔙 Volver al Portal</a>
+        </header>
+
+        <main class="classroom" id="game-area">
+            
+            <!-- Pre-Fin del Juegolay -->
+            <div id="start-screen" class="overlay-screen">
+                <h2>📚 Manual de Supervivencia</h2>
+                <div class="instructions-card">
+                    <p>🎯 <strong>Misión:</strong> Haz clic <strong>ATINANDO AL JEFE</strong> mientras camina de espaldas para sumar puntos.</p>
+                    <p>🔥 <strong>Combos:</strong> ¡Acertar al jefe seguidamente multiplica tus puntos!</p>
+                    <p>🤓 <strong>El Soplón:</strong> Si el chismoso se asoma, dispárale rápido o le avisará al presentador (tienes 4 segundos).</p>
+                    <p>🚫 <strong>Peligro:</strong> Si tu avión aterriza cuando el Jefe está mirándote (😠), <strong>¡ESTÁS DESPEDIDO!</strong></p>
+                    <div class="states-grid" style="margin-top: 15px;">
+                        <div class="state-col">
+                            <span style="font-size: 30px;">📝</span>
+                            <small style="font-size:10px;">SEGURO</small>
+                        </div>
+                        <div class="state-col warning">
+                            <span style="font-size: 30px;">🤨</span>
+                            <small style="font-size:10px;">CUIDADO</small>
+                        </div>
+                        <div class="state-col danger">
+                            <span style="font-size: 30px;">😠</span>
+                            <small style="font-size:10px;">¡LETAL!</small>
+                        </div>
+                        <div class="state-col warning">
+                            <span style="font-size: 30px;">🤓</span>
+                            <small style="font-size:10px;">SOPLÓN</small>
+                        </div>
+                    </div>
+                </div>
+                <button id="start-btn" class="btn-primary">ENTRAR A LA CHARLA</button>
+            </div>
+
+            <!-- Game Scenario -->
+            <div class="room-background">
+                <div class="whiteboard">
+                    <span>Sinergia Proactiva Trimestral...</span>
+                </div>
+                
+                <div class="boss-container" id="boss-container">
+                    <div id="boss-character" class="boss writing">📝</div>
+                </div>
+
+                <div id="snitch-character" class="snitch hidden" title="¡Dispárale rápido!">🤓</div>
+                <div id="combo-display" class="combo-display hidden">x2 COMBO!</div>
+
+                <div class="player-desk">
+                    <span>TU ESCRITORIO (Click para lanzar)</span>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- Fin del Juego Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2 id="end-title">¡Reunión Finalizada!</h2>
+                <p id="end-message">Lograste sobrevivir a la presentación.</p>
+                <div class="final-score">
+                    Aviones acertados: <span id="final-score">0</span>
+                </div>
+                <p id="high-score-msg" class="high-score-msg"></p>
+                <div class="modal-actions">
+                    <button id="restart-btn" class="btn-primary">Otra Reunión</button>
+                    <a href="../index.html" class="btn-secondary">Huir al Menú</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Key Screen -->
+    <div id="boss-screen" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#f3f2f1; z-index:9999; font-family:'Segoe UI', Tahoma, sans-serif; overflow:hidden;">
+        <!-- Ribbon -->
+        <div style="background:#c43e1c; color:white; padding:10px 20px; display:flex; justify-content:space-between; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <div style="display:flex; align-items:center;">
+                <span style="font-weight:bold; font-size:18px; margin-right:20px; background:#b23616; padding:2px 8px; border-radius:3px;">P</span>
+                <span>Presentación_Estrategia_2026.pptx - PowerPoint</span>
+            </div>
+            <div style="letter-spacing:10px; cursor:default;">_ ▢ X</div>
+        </div>
+        <div style="background:#f3f2f1; padding:8px 20px; border-bottom:1px solid #ccc; font-size:13px; color:#444; display:flex; gap:20px;">
+            <span>Archivo</span><span style="color:#c43e1c; font-weight:bold; border-bottom:2px solid #c43e1c; padding-bottom:5px;">Inicio</span><span>Insertar</span><span>Diseño</span><span>Transiciones</span><span>Animaciones</span><span>Presentación</span><span>Revisar</span>
+        </div>
+        <!-- App Body -->
+        <div style="display:flex; height:calc(100vh - 80px);">
+            <!-- Sidebar Slides -->
+            <div style="width:200px; background:#fff; border-right:1px solid #ccc; padding:10px; overflow-y:auto;">
+                <div style="margin-bottom:15px;"><span style="font-size:11px; color:#777; font-weight:bold;">1</span><div style="height:110px; border:2px solid #c43e1c; background:#ffebeb; margin-top:2px;"></div></div>
+                <div style="margin-bottom:15px;"><span style="font-size:11px; color:#777; font-weight:bold;">2</span><div style="height:110px; border:1px solid #ccc; background:#f9f9f9; margin-top:2px;"></div></div>
+                <div style="margin-bottom:15px;"><span style="font-size:11px; color:#777; font-weight:bold;">3</span><div style="height:110px; border:1px solid #ccc; background:#f9f9f9; margin-top:2px;"></div></div>
+            </div>
+            <!-- Main Slide Workspace -->
+            <div style="flex:1; background:#e1dfdd; display:flex; justify-content:center; align-items:center; padding: 40px;">
+                <!-- Current Slide -->
+                <div style="width:100%; max-width:900px; aspect-ratio:16/9; background:#fff; box-shadow:0 6px 15px rgba(0,0,0,0.2); padding:60px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                    <h1 style="color:#444; font-size:48px; margin:0 0 30px 0; text-align:center;">Plan de Expansión Estratégica LATAM</h1>
+                    <div style="width:150px; height:150px; border-radius:50%; background:conic-gradient(#c43e1c 0% 40%, #2b579a 40% 75%, #ffb900 75% 100%); margin-bottom: 40px;"></div>
+                    <p style="color:#666; font-size:22px; text-align:center; max-width:80%; line-height: 1.5;">Estrategias de penetración de mercado y captación de talento en el Q3. Análisis de impacto y métricas comparativas interanuales 2025-2026.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

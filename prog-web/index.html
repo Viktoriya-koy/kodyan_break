@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TemplateEditor_v12.html</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png"
+        href="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg">
+</head>
+
+<body>
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <div class="app-container">
+        <!-- Toolbar -->
+        <div class="cms-toolbar">
+            <span><strong>CMS Manager</strong> > Templates > Corporate_v2</span>
+            <div class="actions">
+                <button class="btn-publish">Publish Changes</button>
+            </div>
+        </div>
+
+        <div class="main-split">
+            <!-- Left: Inspector/Code -->
+            <div class="code-panel">
+                <div class="panel-header">
+                    <span>Page Elements</span>
+                    <span id="bug-count">Bugs: 1</span>
+                </div>
+
+                <div class="node-tree">
+                    <div class="node">&lt;body&gt;</div>
+                    <div class="node indent-1">&lt;header&gt;</div>
+                    <div class="node indent-2">&lt;nav&gt;</div>
+                    <div class="node indent-3 active-node" id="target-node">&lt;div id="hero-banner"&gt;</div>
+                    <div class="node indent-2">&lt;/nav&gt;</div>
+                    <div class="node indent-1">&lt;/header&gt;</div>
+                </div>
+
+                <div class="styles-panel">
+                    <h3>Styles (CSS)</h3>
+                    <div class="style-rule">
+                        <span class="selector">#hero-banner</span> {
+                    </div>
+
+                    <div id="css-properties">
+                        <!-- Generated options -->
+                    </div>
+
+                    <div class="style-rule">}</div>
+                </div>
+
+                <div class="dev-note">
+                    <strong>TICKET #404:</strong> <span id="ticket-desc">Banner is overflowing the screen.</span>
+                </div>
+            </div>
+
+            <!-- Right: Render Preview -->
+            <div class="preview-panel">
+                <div class="preview-frame" id="render-frame">
+                    <!-- The broken website content -->
+                    <nav class="fake-nav">Global Corp</nav>
+                    <div id="render-target" class="broken-element">
+                        <h1>WELCOME TO 2025</h1>
+                        <p>Innovating the future.</p>
+                    </div>
+                    <div class="fake-content">
+                        <p>Our mission is to leverage agile frameworks to provide a robust synopsis for high level
+                            overviews...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memo Modal -->
+        <div id="memo-overlay"
+            style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); z-index:9999; display:flex; justify-content:center; align-items:center;">
+            <div
+                style="background:#2d2d2d; color:#ecf0f1; width:500px; padding:30px; font-family:'Segoe UI', sans-serif; border-radius:8px; box-shadow:0 15px 40px rgba(0,0,0,0.3);">
+                <h2 style="color:#3498db; margin-top:0;">Frontend Maintenance</h2>
+                <p><strong>Task:</strong> Debug visual regressions in the corporate portal.</p>
+                <ul style="line-height:1.6;">
+                    <li>Read the Ticket Description.</li>
+                    <li>Observe the Broken Render on the right.</li>
+                    <li>Select the correct CSS property to fix the layout.</li>
+                </ul>
+                <button onclick="document.getElementById('memo-overlay').remove()"
+                    style="background:#e67e22; color:white; border:none; padding:12px 30px; font-size:16px; border-radius:4px; margin-top:20px; cursor:pointer; font-weight:bold;">OPEN
+                    EDITOR</button>
+            </div>
+        </div>
+
+        <!-- Boss Key -->
+        <div id="boss-overlay" class="hidden"
+            style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:999999; background:#fff; padding:50px; box-sizing:border-box;">
+            In case of emergency break glass.
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
