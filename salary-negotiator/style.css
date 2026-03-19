@@ -1,0 +1,254 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #217346;
+    /* Excel Green */
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.excel-frame {
+    width: 900px;
+    height: 650px;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.ribbon {
+    background: #2b579a;
+    /* Older Excel or generic Office blue/green mix */
+    background: #217346;
+    display: flex;
+    padding: 0 10px;
+}
+
+.ribbon-tab {
+    padding: 8px 15px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.ribbon-tab.active {
+    background: white;
+    color: #217346;
+    border-radius: 4px 4px 0 0;
+}
+
+.formula-bar {
+    background: #f3f3f3;
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+    font-family: monospace;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.chart-area {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-title {
+    margin: 0 0 20px 0;
+    color: #444;
+    font-weight: normal;
+}
+
+.chart-container {
+    width: 600px;
+    height: 300px;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+    display: flex;
+    position: relative;
+    padding-left: 10px;
+}
+
+.y-axis {
+    position: absolute;
+    left: -40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #666;
+}
+
+.bars-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-bottom: 0;
+}
+
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 100%;
+    background: #ccc;
+    transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.player-bar {
+    background: #4472c4;
+    height: 100%;
+}
+
+/* Excel Blue */
+.boss-bar {
+    background: #ed7d31;
+    height: 100%;
+}
+
+/* Excel Orange */
+
+.hp-text {
+    position: absolute;
+    top: -20px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.bar-label {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #444;
+}
+
+.vs-divider {
+    align-self: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    font-style: italic;
+}
+
+.battle-log {
+    width: 100%;
+    height: 60px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 13px;
+    color: #333;
+}
+
+.actions-panel {
+    background: #f3f3f3;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.actions-panel h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.atk-btn {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: all 0.2s;
+}
+
+.atk-btn:hover {
+    background: #e6e6e6;
+    transform: translateY(-2px);
+}
+
+.atk-btn:active {
+    transform: translateY(0);
+}
+
+.atk-btn.special {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+    color: white;
+    border: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.atk-btn.special.ready {
+    opacity: 1;
+    cursor: pointer;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #8e2de2;
+    }
+
+    to {
+        box-shadow: 0 0 20px #8e2de2;
+    }
+}
+
+/* Boss Overlay */
+.hidden {
+    display: none !important;
+}
+
+#boss-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.spreadsheet-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spreadsheet-grid td,
+.spreadsheet-grid th {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: left;
+}
+
+.spreadsheet-grid th {
+    background: #f3f3f3;
+    text-align: center;
+}

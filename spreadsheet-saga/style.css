@@ -1,0 +1,303 @@
+:root {
+    --excel-green: #217346;
+    --border-color: #d4d4d4;
+    --header-bg: #f8f9fa;
+    --selection-color: #107c41;
+    --selection-bg: rgba(16, 124, 65, 0.1);
+    --grid-line: #e1e1e1;
+    --hover-header: #e1e1e1;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none; /* Evita selección de texto real para sensación de app */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+    font-size: 13px;
+    background-color: #fff;
+    overflow: hidden; /* Sin scroll del navegador, usamos el interno del grid */
+}
+
+/* Layout General */
+#app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Title Bar */
+.title-bar {
+    background-color: var(--excel-green);
+    color: white;
+    padding: 4px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.window-controls span {
+    margin-left: 15px;
+    cursor: pointer;
+}
+.close-btn:hover { background: red; }
+
+/* Menu Bar */
+.menu-bar {
+    background-color: var(--excel-green);
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    gap: 20px;
+}
+.menu-bar span {
+    cursor: pointer;
+    padding: 2px 5px;
+}
+.menu-bar span:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Toolbar */
+.toolbar {
+    background-color: #f3f2f1;
+    padding: 8px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.tool-group {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.separator {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
+    margin: 0 5px;
+}
+button {
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 14px;
+}
+button:hover {
+    background-color: #c5c5c5;
+    border-color: #999;
+}
+select {
+    font-size: 12px;
+    border: 1px solid #ccc;
+}
+
+/* Formula Bar */
+.formula-bar-container {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid var(--border-color);
+    background: white;
+}
+.name-box {
+    width: 60px;
+    border: 1px solid var(--border-color);
+    padding: 2px 5px;
+    margin-right: 10px;
+    text-align: center;
+    color: #333;
+}
+.formula-icon {
+    color: #999;
+    margin-right: 10px;
+    font-weight: bold;
+    font-style: italic;
+}
+.formula-input {
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    padding: 2px 5px;
+    height: 22px;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #333;
+}
+
+/* Spreadsheet Area */
+.spreadsheet-container {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 25px 1fr;
+    overflow: hidden;
+}
+
+.corner-header {
+    background: var(--header-bg);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+.column-headers {
+    display: grid;
+    /* grid-template-columns set by JS */
+    overflow: hidden; /* sync scroll logic if fancy, otherwise auto */
+    background: var(--header-bg);
+}
+.col-header {
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    line-height: 24px;
+    font-weight: bold;
+    color: #444;
+}
+
+.row-headers {
+    display: grid;
+    /* grid-template-rows set by JS */
+    overflow: hidden;
+    background: var(--header-bg);
+}
+.row-header {
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    line-height: 24px; /* Match cell height */
+    color: #444;
+}
+
+.grid-viewport {
+    overflow: auto;
+    display: grid;
+    /* template cols/rows set by JS */
+    background: white;
+    cursor: cell;
+}
+
+.cell {
+    border-right: 1px solid var(--grid-line);
+    border-bottom: 1px solid var(--grid-line);
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Numbers align right usually */
+    font-size: 13px;
+    color: #333;
+}
+
+/* Entities */
+.player {
+    outline: 2px solid var(--selection-color);
+    z-index: 10;
+    pointer-events: none; /* Let clicks pass through if needed */
+    position: relative;
+}
+.player::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 6px;
+    height: 6px;
+    background: var(--selection-color);
+    border: 1px solid white;
+    cursor: crosshair;
+}
+
+.enemy {
+    color: #d90000;
+}
+.loot {
+    color: #107c41;
+}
+.goal {
+    background-color: #ffff00;
+    font-weight: bold;
+    justify-content: center;
+}
+
+/* Status Bar */
+.status-bar {
+    height: 30px;
+    background: #f8f9fa;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.sheet-tabs {
+    display: flex;
+    gap: 2px;
+}
+.sheet-tab {
+    padding: 4px 15px;
+    background: #e1e1e1;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+.sheet-tab.active {
+    background: white;
+    border-color: #ccc;
+    border-bottom-color: white;
+    font-weight: bold;
+    color: var(--excel-green);
+    margin-bottom: -1px; /* Fuse with container */
+    padding-bottom: 5px;
+    z-index: 2;
+}
+.status-info {
+    font-size: 12px;
+    color: #666;
+}
+.divider { margin: 0 10px; color: #ccc; }
+
+/* Boss Overlay */
+#boss-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: white;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hidden { display: none !important; }
+
+.overlay-content {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+    width: 600px;
+    border: 1px solid #ccc;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.chart-mockup {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 200px;
+    border-left: 2px solid #555;
+    border-bottom: 2px solid #555;
+    margin: 30px 0;
+    padding: 0 20px;
+}
+.bar {
+    width: 40px;
+    background-color: #4285f4;
+}

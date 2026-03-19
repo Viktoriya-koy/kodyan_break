@@ -1,0 +1,245 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border: 1px solid #999;
+}
+
+/* Header */
+.header {
+    background: #e1e1e1;
+    border-bottom: 1px solid #aaa;
+    padding: 5px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.controls span {
+    margin-right: 15px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.controls span:hover {
+    text-decoration: underline;
+}
+
+/* Workspace */
+.workspace {
+    flex: 1;
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    background: #d4d4d4;
+    border-right: 1px solid #aaa;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.drive-info {
+    background: white;
+    border: 1px solid #999;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.bar-bg {
+    background: #eee;
+    height: 10px;
+    border: 1px solid #999;
+    margin-top: 5px;
+}
+
+.bar-fill {
+    background: #000080;
+    /* Classic Blue */
+    height: 100%;
+}
+
+.action-btn {
+    background: #d9534f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #a94442;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+.stats {
+    font-size: 12px;
+    color: #555;
+    background: #e9e9e9;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.stats span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Game Area */
+.shredder-area {
+    flex: 1;
+    background: #333;
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+    /* The 'knife' cursor */
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #666;
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    pointer-events: none;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Status Bar */
+.status-bar {
+    background: #f0f0f0;
+    border-top: 1px solid #aaa;
+    padding: 4px 10px;
+    font-size: 11px;
+    color: #666;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* BOSS OVERLAY: DEFRAG */
+#boss-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #008080;
+    /* Teal background classic windows */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.defrag-window {
+    width: 600px;
+    background: #c0c0c0;
+    border: 2px solid white;
+    border-right-color: #404040;
+    border-bottom-color: #404040;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.win-header {
+    background: #000080;
+    color: white;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.win-body {
+    padding: 20px;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 12px;
+}
+
+.disk-grid {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    gap: 1px;
+    background: white;
+    border: 1px solid #777;
+    margin: 10px 0;
+    height: 150px;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.disk-block {
+    width: 100%;
+    height: 15px;
+    background: #fff;
+}
+
+.block-used {
+    background: #000080;
+}
+
+.block-free {
+    background: white;
+}
+
+.block-reading {
+    background: yellow;
+}
+
+.block-optimized {
+    background: #008000;
+}
+
+.loading-bar {
+    height: 15px;
+    background: white;
+    border: 1px solid #777;
+    margin-top: 10px;
+}
+
+.loading-fill {
+    height: 100%;
+    width: 0%;
+    background: #000080;
+    animation: load 10s infinite linear;
+}
+
+@keyframes load {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto Anual 2026.xlsx - Hojas de Cálculo</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon para vender la ilusión -->
+    <link rel="icon" type="image/png"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABkElEQVQ4T6WTzStEURiHn3fMc6gxU2M0k5KVrEhZKWWhrJQf4C8wWbO0sLJQFlIkG0VksbOwsFA2ylq5M3fO+Z45956ZPMVtnnPvef/e933e804D/6xQy+L1YQAvy+uH+g/j4XwB8Q+B/xIwDTwFNgB9L/AT2ADm/wkI0hF4A6bLCNwA08B0WUA43gKzZYAJ4BEYKgvI2A9MAJPAcFlAIHwA5oB+YLasQOCPAXVgCegsCwiED0AdsAB0lQWEDy/AFrAAZBwI+R2oAeaBnjKAcLwGtoEloN0BCL8H1IAFIOtAyB+AGmAB6C0DCMcroAFYAtrKAMLxCtgEloC2MoBwvAI2gSWgrQwgHK+ADWAJ6CgDCPAa2ASWgI4ygHC8AjaBJaCjDCAct4F1YBloLwMIx21gHcg4EPInUAMsA+1lAOF4DawDy0B7GUA4XgNrQMaBkD8ANcAy0F4GEI7XwBqwCLR7AH4D1IBlYNDB2g90AANlAGH1GqgB80C3B+AWqAGWgeGygDB6DVQBS0Ctx2EwA4wAww4E/QbmfQrR2tGjAAAAAABJRU5ErkJggg==">
+</head>
+
+<body>
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <div id="app-container">
+        <!-- Barra de Título -->
+        <div class="title-bar">
+            <div class="title-text">Presupuesto Anual 2026.xlsx - Excel</div>
+            <div class="window-controls">
+                <span>_</span>
+                <span>□</span>
+                <span class="close-btn">×</span>
+            </div>
+        </div>
+
+        <!-- Menú -->
+        <div class="menu-bar">
+            <span>Archivo</span>
+            <span>Inicio</span>
+            <span>Insertar</span>
+            <span>Diseño de página</span>
+            <span>Fórmulas</span>
+            <span>Datos</span>
+            <span>Revisar</span>
+            <span>Vista</span>
+        </div>
+
+        <!-- Toolbar (Ribbon simplificado) -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <button title="Guardar">💾</button>
+                <button title="Deshacer">↩</button>
+                <button title="Rehacer">↪</button>
+            </div>
+            <div class="separator"></div>
+            <div class="tool-group">
+                <select class="font-select">
+                    <option>Calibri</option>
+                </select>
+                <select class="size-select">
+                    <option>11</option>
+                </select>
+            </div>
+            <div class="separator"></div>
+            <div class="tool-group">
+                <button style="font-weight:bold">B</button>
+                <button style="font-style:italic">I</button>
+                <button style="text-decoration:underline">U</button>
+            </div>
+            <div class="separator"></div>
+            <div class="tool-group">
+                <div class="color-picker-mock"
+                    style="background: yellow; width: 16px; height: 16px; border: 1px solid #999;"></div>
+                <div class="color-picker-mock"
+                    style="background: red; width: 16px; height: 16px; border: 1px solid #999; margin-left: 4px;"></div>
+            </div>
+        </div>
+
+        <!-- Barra de Fórmulas (Game Log) -->
+        <div class="formula-bar-container">
+            <div class="name-box" id="current-cell-display">A1</div>
+            <div class="formula-icon">fx</div>
+            <div class="formula-input" id="game-log">Esperando entrada...</div>
+        </div>
+
+        <!-- Área Principal (Grid) -->
+        <div class="spreadsheet-container">
+            <div class="corner-header">◢</div>
+            <div class="column-headers" id="col-headers">
+                <!-- Generado por JS: A, B, C... -->
+            </div>
+            <div class="row-headers" id="row-headers">
+                <!-- Generado por JS: 1, 2, 3... -->
+            </div>
+            <div class="grid-viewport" id="grid-container">
+                <!-- Celdas generadas por JS -->
+            </div>
+        </div>
+
+        <!-- Barra de Estado / Hojas -->
+        <div class="status-bar">
+            <div class="sheet-tabs">
+                <div class="sheet-tab active">Hoja1</div>
+                <div class="sheet-tab">Hoja2</div>
+                <div class="sheet-tab" title="Nueva hoja">+</div>
+            </div>
+            <div class="status-info">
+                <span id="player-health">Balance: $1000</span>
+                <span class="divider">|</span>
+                <span id="game-status">LISTO</span>
+            </div>
+            <div class="zoom-controls">
+                - 100% +
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay Boss Key -->
+    <div id="boss-overlay" class="hidden">
+        <div class="overlay-content">
+            <h2>Reporte de Variación Trimestral</h2>
+            <div class="chart-mockup">
+                <div class="bar" style="height: 40%"></div>
+                <div class="bar" style="height: 60%"></div>
+                <div class="bar" style="height: 30%"></div>
+                <div class="bar" style="height: 80%"></div>
+            </div>
+            <p>Datos confidenciales. Uso interno solamente.</p>
+        </div>
+    </div>
+
+    <!-- Corporate Memo (Instructions) -->
+    <div id="memo-overlay"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; justify-content:center; align-items:center;">
+        <div
+            style="background:#fff; width:500px; padding:40px; box-shadow:0 10px 25px rgba(0,0,0,0.5); font-family:'Times New Roman', serif; position:relative;">
+            <div style="border-bottom:2px solid #000; margin-bottom:20px; padding-bottom:10px;">
+                <h2 style="margin:0; text-transform:uppercase; text-align:center;">Memorandum Interno</h2>
+            </div>
+            <p><strong>DE:</strong> Dirección Financiera</p>
+            <p><strong>PARA:</strong> Analista Jr.</p>
+            <p><strong>ASUNTO:</strong> Procedimiento de Cierre Fiscal</p>
+            <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+            <p>Se le notifica el protocolo vigente para la consolidación de hojas de cálculo:</p>
+            <ul style="line-height:1.6;">
+                <li>Desplácese entre celdas utilizando las <strong>Flechas del Teclado</strong>.</li>
+                <li>Elimine discrepancias (enemigos) presionando la <strong>Barra Espaciadora</strong>.</li>
+                <li>Evite el contacto con errores contables para mantener su salud financiera.</li>
+                <li>Complete las 5 hojas antes del cierre del ejercicio.</li>
+            </ul>
+            <p><em>"La eficiencia es nuestra prioridad."</em></p>
+            <button onclick="document.getElementById('memo-overlay').remove()"
+                style="display:block; width:100%; padding:10px; background:#333; color:#fff; border:none; cursor:pointer; margin-top:20px; font-weight:bold;">CONFIRMAR
+                LECTURA</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>

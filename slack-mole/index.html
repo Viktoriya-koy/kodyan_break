@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - CorpConnect</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <!-- Game Container: Chat Interface -->
+    <div id="game-container" class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="team-name">CorpConnect ▼</div>
+
+            <div class="section-title">CANALES</div>
+            <div class="channel active"># general</div>
+            <div class="channel"># random</div>
+            <div class="channel"># anuncios</div>
+            <div class="channel"># logística</div>
+            <div class="channel"># movilidad</div>
+
+            <div class="section-title">MENSAJES DIRECTOS</div>
+            <div class="dm online">● Jefe</div>
+            <div class="dm busy">● RRHH</div>
+            <div class="dm offline">○ IT Support</div>
+            <div class="dm online">● Pasante</div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-content">
+            <div class="header">
+                <div class="channel-header"># general</div>
+                <div class="header-info">👥 24 | 📌 3</div>
+            </div>
+
+            <div id="message-area" class="message-area">
+                <!-- Background static chatter (decoration) -->
+                <div class="msg-static">
+                    <div class="avatar" style="background: #e01e5a">J</div>
+                    <div class="msg-content">
+                        <div class="msg-user">Jefe <span class="time">09:00</span></div>
+                        <div class="msg-text">Recordad subir los reportes antes de las 12.</div>
+                    </div>
+                </div>
+
+                <!-- PLAY AREA: Popups will spawn here -->
+            </div>
+
+            <div class="input-area">
+                <div class="input-box">Enviar mensaje a #general</div>
+            </div>
+        </div>
+
+        <!-- HUD Overlay -->
+        <div class="hud">
+            <div class="hud-item">Productividad: <span id="health-display">100%</span></div>
+            <div class="hud-item">Mensajes Cerrados: <span id="score-display">0</span></div>
+            <div class="hud-item">Tiempo: <span id="time-display">00:00</span></div>
+        </div>
+
+        <!-- Fin del Juego Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>⚠️ DESPIDO PROCEDENTE</h2>
+                <p>Tu bandeja de entrada se ha desbordado.</p>
+                <p>Puntuación Final: <span id="final-score">0</span></p>
+                <button onclick="location.reload()">Reintentar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Key Overlay: PDF Reader -->
+    <div id="boss-overlay" class="hidden">
+        <div class="pdf-toolbar">
+            <span class="pdf-title">Manual_Procedimientos_Movilidad_Logistica_2026.pdf</span>
+            <div class="pdf-controls">
+                <span>-</span> <span>100%</span> <span>+</span> <span>⬇</span> <span>🖨️</span>
+            </div>
+        </div>
+        <div class="pdf-viewer">
+            <div class="pdf-page">
+                <h1>MANUAL DE PROCEDIMIENTOS</h1>
+                <h2>DIRECCIÓN DE MOVILIDAD Y LOGÍSTICA</h2>
+                <hr>
+                <p class="meta">Versión 1.0 - Enero 2026 | Confidencial</p>
+
+                <h3>1. INTRODUCCIÓN</h3>
+                <p>El presente documento establece los lineamientos operativos para la gestión eficiente de los recursos
+                    vehiculares y la cadena de suministro interna. Su cumplimiento es obligatorio para todo el personal
+                    adscrito al departamento.</p>
+
+                <h3>2. OBJETIVOS ESPECÍFICOS</h3>
+                <ul>
+                    <li>Optimizar rutas de distribución.</li>
+                    <li>Reducir huella de carbono en la flota.</li>
+                    <li>Digitalizar procesos de inventario.</li>
+                </ul>
+
+                <h3>3. PROTOCOLO DE ASIGNACIÓN DE UNIDADES</h3>
+                <p>Toda solicitud de vehículo corporativo debe realizarse a través del formulario F-204 con al menos 48
+                    horas de antelación. Las excepciones serán evaluadas por la Gerencia de Logística según
+                    disponibilidad.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corporate Memo (Instructions) -->
+    <div id="memo-overlay"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; display:flex; justify-content:center; align-items:center;">
+        <div style="background:#fff; width:450px; padding:25px; border-radius:8px; font-family:'Lato', sans-serif;">
+            <div
+                style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                <span style="font-size:24px; margin-right:10px;">📢</span>
+                <h2 style="margin:0; font-size:18px;">Normas de Convivencia Digital</h2>
+            </div>
+            <p><strong>Para mantener un ambiente de trabajo productivo:</strong></p>
+            <ul style="color:#444; line-height:1.6;">
+                <li>Cierre inmediantamente las notificaciones irrelevantes (Spam, Memes).</li>
+                <li>Atienda con prioridad los mensajes del <strong>JEFE</strong> (Rojo).</li>
+                <li>Si se acumulan más de 10 ventanas abiertas, se considerará abandono de puesto.</li>
+            </ul>
+            <p style="font-size:12px; color:#666;">HR Dept - "Conectados pero eficientes"</p>
+            <button onclick="document.getElementById('memo-overlay').remove()"
+                style="width:100%; padding:10px; background:#4a154b; color:white; border:none; border-radius:4px; cursor:pointer; font-weight:bold; margin-top:15px;">ACEPTAR</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
