@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pull Request #1024 - Java Corp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="icon" type="image/x-icon"
+        href="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg">
+</head>
+
+<body>
+    <div id="start-screen-mod" class="overlay-screen" style="position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:99998; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white;">
+        <h2>Instrucciones del Simulador</h2>
+        <div style="background:#fff; color:#333; padding:20px; border-radius:10px; max-width:400px; text-align:center; margin-bottom:20px;">
+            <p>Deberás completar esta tarea corporativa demostrando tu proactividad y sinergia.</p>
+            <p>Utiliza el ratón o el teclado según corresponda para interactuar con la consola, formularios o elementos en pantalla.</p>
+        </div>
+        <button onclick="document.getElementById('start-screen-mod').style.display='none'" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#354393; color:white; border:none; border-radius:5px; font-weight:bold;">COMENZAR TAREA</button>
+    </div>
+    
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <div class="header">
+        <div class="logo">CoffeeGit</div>
+        <div class="breadcrumb">JavaCorp / backend / <span id="module-name">Module 1</span></div>
+        <div class="user-profile">Senior_Dev</div>
+    </div>
+
+    <div class="main-container">
+        <!-- Barra Lateral de Progreso -->
+        <div class="sidebar">
+            <div class="sidebar-header">OPEN TICKETS</div>
+            <div id="ticket-list">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="stats-box">
+                <div>Puntos: <span id="score">0</span></div>
+                <div>Completed: <span id="progress">0/0</span></div>
+            </div>
+        </div>
+
+        <!-- Área de Revisión -->
+        <div class="review-area">
+            <div class="pr-header">
+                <div>
+                    <h2 id="ticket-title">Fixing User Login</h2>
+                    <span class="tag">Bugfix</span> <span class="tag">Priority: High</span>
+                </div>
+            </div>
+
+            <div class="diff-container">
+                <div class="code-panel">
+                    <pre><code class="language-java" id="code-display">
+// Loading code...
+                    </code></pre>
+                </div>
+
+                <div class="options-panel">
+                    <h3>Code Review Action</h3>
+                    <p class="instruction">Selecciona la corrección adecuada para la línea resaltada:</p>
+                    <div id="options-container">
+                        <!-- Options injected via JS -->
+                    </div>
+                    <div id="feedback-area" class="hidden">
+                        <!-- Feedback -->
+                    </div>
+                    <button id="next-btn" class="btn-primary hidden">Next Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Key Overlay -->
+    <div id="boss-overlay" class="hidden">
+        <div class="overlay-content">
+            <h1>Compiling Project...</h1>
+            <div class="loader"></div>
+            <p>Please wait while Maven builds the artifacts.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="tickets.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
