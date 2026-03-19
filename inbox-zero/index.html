@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox_Zero_Tinder.exe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="start-screen-mod" class="overlay-screen" style="position: fixed; top:0; left:0; width:100vw; height:100vh; z-index:99998; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; color:white;">
+        <h2>Instrucciones del Simulador</h2>
+        <div style="background:#fff; color:#333; padding:20px; border-radius:10px; max-width:400px; text-align:center; margin-bottom:20px;">
+            <p>Deberás completar esta tarea operativa antes de que se agote el tiempo.</p>
+            <p>Utiliza el ratón o el teclado para interactuar con la consola, planillas o elementos en pantalla.</p>
+        </div>
+        <button onclick="document.getElementById('start-screen-mod').style.display='none'" style="padding:10px 20px; font-size:18px; cursor:pointer; background:#354393; color:white; border:none; border-radius:5px; font-weight:bold;">COMENZAR TAREA</button>
+    </div>
+    
+    <a href="../index.html" class="btn-return" style="position:fixed; top:15px; right:20px; background:var(--primary-color, #354393); color:white; padding:8px 15px; text-decoration:none; border-radius:8px; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); z-index:99999;">🔙 Volver al Portal</a>
+
+
+    <div class="app-container">
+        <div class="header">
+            <h2>Gestor de Inbox (BETA)</h2>
+            <div class="reputation-bar">Reputación: <span id="score-val">100</span>/100</div>
+        </div>
+        
+        <div class="deck-container">
+            <div id="card-deck" class="card-deck">
+                <!-- Cards injected here by JS -->
+            </div>
+            
+            <div id="game-over" class="hidden game-over-panel">
+                <h3 id="end-title">¡Despedido!</h3>
+                <p>Tu reputación en la oficina llegó a 0.</p>
+                <div class="stats">
+                    Mails clasificados: <span id="final-count">0</span>
+                </div>
+                <button id="restart-btn" class="btn-primary">Intentar de Nuevo</button>
+            </div>
+        </div>
+        
+        <div class="controls-hint">
+            <div class="hint-left">⬅️ SPAM</div>
+            <div class="hint-right">RESPONDER ➡️</div>
+        </div>
+    </div>
+
+    <!-- Boss Key Screen -->
+    <div id="boss-overlay" class="hidden" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#fff; z-index:999999; font-family:'Segoe UI', Tahoma, sans-serif; overflow:hidden;">
+        <!-- Ribbon -->
+        <div style="background:#0078d4; color:white; padding:10px 20px; display:flex; justify-content:space-between; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <div style="display:flex; align-items:center;">
+                <span style="font-weight:bold; font-size:18px; margin-right:20px; background:#005a9e; padding:2px 8px; border-radius:3px;">O</span>
+                <span>Bandeja de entrada - Microsoft Outlook</span>
+            </div>
+            <div style="letter-spacing:10px; cursor:default;">_ ▢ X</div>
+        </div>
+        <div style="background:#f3f2f1; padding:8px 20px; border-bottom:1px solid #ccc; font-size:13px; color:#444; display:flex; gap:20px;">
+            <span>Archivo</span><span style="color:#0078d4; font-weight:bold; border-bottom:2px solid #0078d4; padding-bottom:5px;">Inicio</span><span>Enviar y recibir</span><span>Carpeta</span><span>Vista</span><span>Ayuda</span>
+        </div>
+        <!-- Body -->
+        <div style="display:flex; height:calc(100vh - 80px);">
+            <!-- Sidebar -->
+            <div style="width:220px; background:#f3f2f1; border-right:1px solid #ccc; padding:20px 15px; font-size:14px; color:#333; box-sizing: border-box;">
+                <div style="margin-bottom:15px; font-weight:bold; color:#0078d4; background:#e1dfdd; padding:8px; border-radius:4px;">Bandeja de entrada <span style="float:right;">2</span></div>
+                <div style="margin-bottom:15px; padding:8px;">Borradores</div>
+                <div style="margin-bottom:15px; padding:8px;">Elementos enviados</div>
+                <div style="margin-bottom:15px; padding:8px;">Elementos eliminados</div>
+                <div style="margin-bottom:15px; margin-top:30px; font-weight:bold; color:#666;">Grupos</div>
+                <div style="margin-bottom:15px; padding:8px;">Comité Organizador</div>
+            </div>
+            <!-- Mail List -->
+            <div style="width:340px; background:#fff; border-right:1px solid #ccc; overflow-y:auto;">
+                <div style="padding:15px 20px; border-bottom:1px solid #eee; background:#e1dfdd; border-left:4px solid #0078d4; cursor:pointer;">
+                    <div style="display:flex; justify-content:space-between;"><span style="font-weight:bold; font-size:15px; color:#333;">Dpto. Recursos Humanos</span><span style="font-size:12px; color:#0078d4;">11:42 AM</span></div>
+                    <div style="font-size:13px; color:#0078d4; margin-top:5px; font-weight:500;">IMPORTANTE: Nuevas políticas corporativas</div>
+                    <div style="font-size:13px; color:#666; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Estimado equipo, adjunto encontrará un PDF con...</div>
+                </div>
+                <div style="padding:15px 20px; border-bottom:1px solid #eee; cursor:pointer;">
+                    <div style="display:flex; justify-content:space-between;"><span style="font-weight:bold; font-size:15px; color:#333;">Soporte IT</span><span style="font-size:12px; color:#666;">Ayer</span></div>
+                    <div style="font-size:13px; color:#333; margin-top:5px;">Acción Requerida: Actualización Sistema</div>
+                    <div style="font-size:13px; color:#666; margin-top:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Se recuerda que este viernes 24 el sistema estará...</div>
+                </div>
+            </div>
+            <!-- Mail Reading Pane -->
+            <div style="flex:1; background:#fff; padding:40px; overflow-y:auto;">
+                <h1 style="font-size:26px; color:#333; margin:0 0 25px 0; font-weight:300;">IMPORTANTE: Nuevas políticas corporativas Q3</h1>
+                <div style="display:flex; align-items:center; margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid #eee;">
+                    <div style="width:45px; height:45px; border-radius:50%; background:#d13438; color:white; display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:16px; margin-right:15px;">RH</div>
+                    <div>
+                        <div style="font-weight:bold; font-size:15px; color:#333;">Dpto. Recursos Humanos &lt;hr@empresa.com&gt;</div>
+                        <div style="font-size:13px; color:#666; margin-top:2px;">Para: Todos los Empleados</div>
+                    </div>
+                </div>
+                <div style="font-size:15px; color:#444; line-height:1.7;">
+                    Estimado equipo,<br><br>
+                    Adjunto encontrará un documento detallado con el resumen de las actualizaciones correspondientes a la política de cumplimiento corporativo y la normativa de convivencia en el ambiente de trabajo.<br><br>
+                    Su cumplimiento es de carácter mandatorio a partir del próximo primer día de mes hábil. Si tiene dudas o requiere clarificaciones relativas a incisos particulares, por favor contáctese directamente con su supervisión inmediata.<br><br>
+                    Agradecemos su colaboración continua.<br><br>
+                    Saludos cordiales,<br>
+                    <strong style="color:#0078d4;">Dirección de Recursos Humanos</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

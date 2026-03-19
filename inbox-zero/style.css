@@ -1,0 +1,86 @@
+body, html {
+    margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eceff1; height: 100vh; overflow: hidden;
+    user-select: none;
+}
+
+.app-container {
+    max-width: 500px; margin: 0 auto; height: 100%;
+    display: flex; flex-direction: column;
+    background: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.header {
+    background: #1976d2; color: #fff; padding: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10;
+}
+
+.header h2 { margin: 0; font-size: 18px; }
+.reputation-bar { font-weight: bold; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 15px; }
+
+.deck-container {
+    flex: 1; position: relative;
+    display: flex; justify-content: center; align-items: center;
+    background: #f5f5f5; overflow: hidden;
+}
+
+.card-deck {
+    position: relative;
+    width: 320px; height: 450px;
+    perspective: 1000px;
+}
+
+/* Individual Card */
+.email-card {
+    position: absolute; width: 100%; height: 100%;
+    background: #fff; border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex; flex-direction: column; padding: 25px; box-sizing: border-box;
+    transform-origin: 50% 100%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: grab; border-top: 8px solid #2196f3;
+}
+
+.email-card.dragging {
+    transition: none; cursor: grabbing;
+}
+
+.sender-info { display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.avatar { width: 50px; height: 50px; background: #e0e0e0; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; margin-right: 15px; }
+.sender-details { flex: 1; }
+.sender-name { font-weight: bold; font-size: 16px; margin: 0; color: #333; }
+.sender-email { font-size: 12px; color: #888; margin: 0; }
+
+.email-subject { font-size: 18px; font-weight: bold; color: #222; margin-bottom: 10px; }
+.email-body { font-size: 14px; color: #555; line-height: 1.5; flex: 1; }
+
+/* Stamps */
+.stamp {
+    position: absolute; top: 40px; font-size: 35px; font-weight: 900;
+    padding: 5px 10px; border: 4px solid; border-radius: 8px; opacity: 0; pointer-events: none;
+    text-transform: uppercase; letter-spacing: 2px;
+}
+.stamp.nope { border-color: #f44336; color: #f44336; right: 20px; transform: rotate(15deg); }
+.stamp.like { border-color: #4caf50; color: #4caf50; left: 20px; transform: rotate(-15deg); }
+
+/* Hints */
+.controls-hint {
+    padding: 20px; display: flex; justify-content: space-between;
+    background: #fff; border-top: 1px solid #eee; font-weight: bold; color: #78909c;
+}
+
+.hint-left { color: #f44336; }
+.hint-right { color: #4caf50; }
+
+/* Game over */
+.game-over-panel {
+    position: absolute; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.95); z-index: 100;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 20px; box-sizing: border-box;
+}
+
+.btn-primary { background: #2196f3; color: #fff; border: none; padding: 12px 25px; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+
+.hidden { display: none !important; }
