@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape from the Micromanager - Office Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="titles">
+                <h1>Escape from the Micromanager</h1>
+                <h2>¡Corre por tu vida (y tu sanidad mental)!</h2>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="label">NIVEL</span>
+                    <span class="value" id="level">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">DISTANCIA</span>
+                    <span class="value" id="score">0</span>
+                </div>
+            </div>
+            <a href="../index.html" class="btn-return">🔙 Menú Principal</a>
+        </header>
+
+        <main class="game-area" id="game-area">
+            
+            <div id="start-screen" class="overlay-screen">
+                <h2>🏃‍♂️ Escape from the Micromanager</h2>
+                <div class="instructions-card">
+                    <p>🎯 <strong>Misión:</strong> El Micromanager te persigue para pedirte que le armes un gráfico en PowerPoint. ¡No dejes que te alcance!</p>
+                    <p>🕹️ <strong>Controles:</strong> Flecha <strong style="color:#1565c0">ARRIBA</strong> / Clic Superior para saltar. Flecha <strong style="color:#1565c0">ABAJO</strong> / Clic Inferior para agacharte.</p>
+                    <p>🚧 <strong>Cuidado:</strong> Evita obstáculos por el piso (🖨️, ☕, 📚) e-mails voladores (📧, ✈️) por arriba.</p>
+                    <p>Acumula puntos por cada metro que logres escapar. Sube de nivel cada 500m.</p>
+                </div>
+                <button id="start-btn" class="btn-primary">COMENZAR LA HUÍDA</button>
+            </div>
+
+            <!-- Parallax Backgrounds -->
+            <div id="bg-far" class="background-layer far"></div>
+            <div id="bg-mid" class="background-layer mid"></div>
+
+            <div class="floor-texture"></div>
+
+            <!-- Entities -->
+            <div id="micromanager" class="character manager">
+                <div class="char-label manager-label">🚨 MICROMANAGER</div>
+                <div class="char-emoji">🧟‍♂️</div>
+                <div id="speech-bubble" class="speech-bubble hidden">¿Ya mandaste el Excel?</div>
+            </div>
+            
+            <div id="player" class="character player">
+                <div class="char-label player-label">TÚ</div>
+                <div class="char-emoji">🏃‍♂️</div>
+            </div>
+
+            <div id="world">
+                <!-- Obstacles appended here dynamically -->
+            </div>
+
+        </main>
+        
+        <!-- Fin del Juego Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>¡Te Atrapó!</h2>
+                <p>"Ah, qué bueno que te encuentro, fíjate si puedes hacerme este reporte rapidito..."</p>
+                <div class="final-score">
+                    Metros escapados: <span id="final-score">0</span>m
+                </div>
+                <p id="high-score-msg" class="high-score-msg"></p>
+                <div class="modal-actions">
+                    <button id="restart-btn" class="btn-primary">Correr Otra Vez</button>
+                    <a href="../index.html" class="btn-secondary">Huir al Menú</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boss Key Screen -->
+    <div id="boss-screen" class="hidden">
+        <div class="fake-excel-header">
+            <span>📊 Reporte_Tardanzas.xlsx - Excel</span>
+            <div class="window-controls">_ ▢ X</div>
+        </div>
+        <div class="fake-excel-ribbon">Archivo | Inicio | Insertar | Diseño | Fórmulas | Datos | Revisar | Vista</div>
+        <table class="fake-excel-table">
+            <thead>
+                <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+            </thead>
+            <tbody>
+                <tr><th>1</th><td>Empleado</td><td>Lunes</td><td>Martes</td><td>Miércoles</td><td>Jueves</td><td>Viernes</td></tr>
+                <tr><th>2</th><td>Juan Pérez</td><td>08:00</td><td>08:05</td><td>08:00</td><td>08:12</td><td>08:00</td></tr>
+                <tr><th>3</th><td>María López</td><td>08:02</td><td>08:01</td><td>08:00</td><td>08:00</td><td>08:05</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
