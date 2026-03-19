@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.game-container {
+    background: #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.close-btn {
+    background: #e74c3c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    /* 20x15 grid, cells 30px */
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(15, 30px);
+    gap: 1px;
+    background: #2c3e50;
+    border: 5px solid #bdc3c7;
+    position: relative;
+    width: 620px;
+    /* 20 * 30 + gaps */
+    height: 465px;
+    /* 15 * 30 + gaps */
+}
+
+.cell {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.wall {
+    background: #7f8c8d;
+    border-radius: 2px;
+}
+
+.floor {
+    background: #ecf0f1;
+}
+
+.bean {
+    color: #6d4c41;
+    /* Coffee color */
+    font-size: 14px;
+}
+
+.powerup {
+    font-size: 20px;
+    animation: pulse 1s infinite;
+}
+
+/* Entities */
+.player {
+    background: #3498db;
+    border-radius: 50%;
+    z-index: 10;
+    transition: transform 0.1s;
+}
+
+.enemy {
+    z-index: 9;
+    transition: transform 0.2s linear;
+}
+
+.enemy.scared {
+    filter: grayscale(100%) opacity(0.7);
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+button {
+    background: #f1c40f;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    color: #2c3e50;
+}
+
+
+button:hover {
+    background: #f39c12;
+}
+
+/* Boss Overlay Styles */
+#boss-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    z-index: 100;
+    color: black;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.spreadsheet {
+    width: 80%;
+    border: 1px solid #ccc;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    background: white;
+}
+
+.sheet-header,
+.sheet-row {
+    display: flex;
+}
+
+.cell {
+    border: 1px solid #e0e0e0;
+    padding: 5px 10px;
+    flex: 1;
+    text-align: right;
+}
+
+.sheet-header .cell {
+    background: #f3f3f3;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-num {
+    background: #f3f3f3;
+    flex: 0 0 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.boss-hint {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #999;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
